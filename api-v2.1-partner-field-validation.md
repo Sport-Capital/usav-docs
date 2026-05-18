@@ -51,7 +51,7 @@ Workflows regarding event rosters, frozen rosters, and roster-specific webhooks 
 
 ## 4. Required Verification
 
-To finalize the v2.1 specification, please confirm the following technical details by **[Insert Date - End of Next Week]**:
+To finalize the v2.1 specification, please confirm the following technical details byby Friday, May 22, 2026:
 
 1. Does the proposed `legacyTeamCode` construction technically fulfill the requirement for team pairing, syncing, and result routing?
 
