@@ -1380,7 +1380,7 @@ Webhooks deliver real-time notifications for entity changes. Webhook subscriptio
 | `club.transfer.rejected` | Club Transfer | A transfer is denied |
 | `club.transfer.completed` | Club Transfer | A transfer is fully processed |
 | `team.created` | Team | A new Team is created |
-| `team.updated` | Team | A Team field changes |
+| `team.updated` | Team | Any Team field changes |
 
 Team webhooks in v2.1 are basic notifications intended to help partners avoid polling for Team changes. Retry handling, delivery logs, and failed webhook notifications may be expanded after the June 1 milestone.
 
