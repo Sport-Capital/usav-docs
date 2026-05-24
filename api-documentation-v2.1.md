@@ -2,6 +2,7 @@
 
 **Author:** Alex Wilson / USAV Engineering
 **Date:** 2026-04-27
+**Updated:** 2026-05-24
 **Version:** 2.1
 **Database:** CortIQ
 **Status:** Current partner-facing version. Supersedes v2.0 (`api-documentation-v2.0.md`).
@@ -526,6 +527,22 @@ Teams are competitive units within clubs, organized by age definition and gender
 
 In v2.1 the legacy `division` field is replaced by two structured fields: `ageDefinition` and `gender`. "Division" is treated as the composite display label combining the two.
 
+Team responses include a partner-facing operational `teamCode` generated from available Team components. Partners use Team Code for matching, results, ranking, seeding, troubleshooting, and existing workflows. Team UUID remains the identifier to use when guaranteed uniqueness is required; partners should not treat `teamCode` as the guaranteed unique Team identifier.
+
+The `teamCode` structure is:
+
+`genderCode` + `ageCode` + `clubCode` + `teamRank` + `regionCode`
+
+| Component | Format |
+|---|---|
+| `genderCode` | 1 character |
+| `ageCode` | 2 digits, no `U` |
+| `clubCode` | 5 characters |
+| `teamRank` | 2 digits, such as `01` |
+| `regionCode` | 2 characters |
+
+Example: `G` + `08` + `VBONE` + `01` + `SO` = `G08VBONE01SO`.
+
 #### List Teams
 
 ```http
@@ -569,11 +586,17 @@ Roster is opt-in via `expand=members` to keep the default response small.
 {
   "id": "550e8400-e29b-41d4-a716-446655440010",
   "name": "Girls 16U Elite",
+  "teamCode": "G16VBONE01SO",
+  "genderCode": "G",
+  "ageCode": "16",
+  "clubCode": "VBONE",
+  "teamRank": "01",
+  "regionCode": "SO",
   "clubId": "550e8400-e29b-41d4-a716-446655440000",
   "club": {
     "id": "550e8400-e29b-41d4-a716-446655440000",
-    "name": "Riverside Volleyball Club",
-    "code": "RVC"
+    "name": "Volleyball One",
+    "code": "VBONE"
   },
   "ageDefinition": "16U",
   "gender": "Female",
@@ -605,6 +628,12 @@ Roster is opt-in via `expand=members` to keep the default response small.
 |---|---|---|
 | `id` | string | Team UUID |
 | `name` | string | Team name |
+| `teamCode` | string | Partner-facing operational Team Code generated from Team components. Used for matching, results, ranking, seeding, troubleshooting, and existing workflows. Not guaranteed unique; use Team UUID when uniqueness is required. |
+| `genderCode` | string | 1-character Team Code component |
+| `ageCode` | string | 2-digit Team Code component, with no `U` |
+| `clubCode` | string | 5-character partner-facing Club Code component |
+| `teamRank` | string | 2-digit team rank component, such as `01` |
+| `regionCode` | string | 2-character partner-facing Region Code component |
 | `clubId` | string | Parent club UUID |
 | `club` | object | Parent club details (full when `expand=club`) |
 | `ageDefinition` | string | Age definition: `7U` through `18U` |
@@ -1373,16 +1402,16 @@ Webhooks deliver real-time notifications for entity changes. Webhook subscriptio
 | `profile.suspended` | Profile | A suspension is added to a profile |
 | `club.affiliated` | Club | Club moves to `Active` affiliation |
 | `club.disaffiliated` | Club | Club moves off `Active` |
+| `team.created` | Team | A new Team record is created |
+| `team.updated` | Team | Any Team field changes |
 | `credential.completed` | Credential | A required credential is completed |
 | `credential.expired` | Credential | A credential passes its `validUntil` |
 | `club.transfer.initiated` | Club Transfer | A member transfer is requested |
 | `club.transfer.approved` | Club Transfer | A transfer is approved |
 | `club.transfer.rejected` | Club Transfer | A transfer is denied |
 | `club.transfer.completed` | Club Transfer | A transfer is fully processed |
-| `team.created` | Team | A new Team is created |
-| `team.updated` | Team | Any Team field changes |
 
-Team webhooks in v2.1 are basic notifications intended to help partners avoid polling for Team changes. Retry handling, delivery logs, and failed webhook notifications may be expanded after the June 1 milestone.
+The Team webhook events are basic v2.1 notifications intended to help partners avoid polling for Team changes. Retry handling, delivery logs, failed webhook notifications, and richer webhook management may be expanded after the June 1 milestone.
 
 ### Webhook Payload
 
