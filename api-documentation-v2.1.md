@@ -2,10 +2,22 @@
 
 **Author:** Alex Wilson / USAV Engineering
 **Date:** 2026-04-27
-**Updated:** 2026-05-24
+**Updated:** 2026-06-12
 **Version:** 2.1
-**Database:** CortIQ
+**Database:** Volleyball Data Hub (VDH)
 **Status:** Current partner-facing version. Supersedes v2.0 (`api-documentation-v2.0.md`).
+
+## June 2026 Team Code Standardization
+
+Version 2.1 was updated to align Team responses with the USAV Data Standards Group Team Code standard. The update:
+
+- establishes Team Code uniqueness across the USAV ecosystem;
+- retains Team UUID as the authoritative, immutable API identifier;
+- replaces `ageCode` with separate `ageGroup` and `playLevel` components;
+- standardizes `genderCode` as `M`, `F`, or `C`;
+- defines Club Code format and uniqueness scope;
+- supports two-character USAV Region Codes and three-character foreign codes; and
+- documents when Team Code generation may return `null`.
 
 ---
 
@@ -523,25 +535,34 @@ Returns the full Club object below. No `expand` parameter in v2.1.
 
 ### Club Team
 
-Teams are competitive units within clubs, organized by age definition and gender. Teams contain member rosters.
+Teams are competitive units within clubs, organized by classification, play level, and gender. Teams contain member rosters.
 
 In v2.1 the legacy `division` field is replaced by two structured fields: `ageDefinition` and `gender`. "Division" is treated as the composite display label combining the two.
 
-Team responses include a partner-facing operational `teamCode` generated from available Team components. Partners use Team Code for matching, results, ranking, seeding, troubleshooting, and existing workflows. Team UUID remains the identifier to use when guaranteed uniqueness is required; partners should not treat `teamCode` as the guaranteed unique Team identifier.
+Team responses include a standardized, partner-facing operational `teamCode`. Partners use Team Code for matching, results, ranking, seeding, troubleshooting, and existing operational workflows.
 
-The `teamCode` structure is:
+Each Team also has a UUID in `id`. The UUID is the authoritative, immutable API identifier. Every generated Team Code must be unique across the USAV ecosystem, but it may change when one of its business components changes. Integrations should store and use the Team UUID as the permanent system reference.
 
-`genderCode` + `ageCode` + `clubCode` + `teamRank` + `regionCode`
+The standardized `teamCode` structure is:
 
-| Component | Format |
-|---|---|
-| `genderCode` | 1 character |
-| `ageCode` | 2 digits, no `U` |
-| `clubCode` | 5 characters |
-| `teamRank` | 2 digits, such as `01` |
-| `regionCode` | 2 characters |
+`genderCode` + `ageGroup` + `playLevel` + `clubCode` + `teamRank` + `regionCode`
 
-Example: `G` + `08` + `VBONE` + `01` + `SO` = `G08VBONE01SO`.
+| Component | Format | Standard |
+|---|---|---|
+| `genderCode` | 1 character | `M` = Male, `F` = Female, `C` = Coed |
+| `ageGroup` | 1 character | `J` = Junior, `A` = Adult |
+| `playLevel` | 2 characters | Junior age or adult play-level code |
+| `clubCode` | 5 characters | Uppercase letters and numbers; unique within the Region |
+| `teamRank` | 2 digits | Zero-padded value such as `01` |
+| `regionCode` | 2 or 3 characters | Two-character USAV Region Code or three-character foreign code |
+
+The complete Team Code is 13 characters for a USAV Region team and 14 characters when a three-character foreign code is used.
+
+Junior example:
+
+`F` + `J` + `16` + `VBONE` + `01` + `SO` = `FJ16VBONE01SO`
+
+A `teamCode` can be generated only when all required components are populated and valid.
 
 #### List Teams
 
@@ -586,9 +607,10 @@ Roster is opt-in via `expand=members` to keep the default response small.
 {
   "id": "550e8400-e29b-41d4-a716-446655440010",
   "name": "Girls 16U Elite",
-  "teamCode": "G16VBONE01SO",
-  "genderCode": "G",
-  "ageCode": "16",
+  "teamCode": "FJ16VBONE01SO",
+  "genderCode": "F",
+  "ageGroup": "J",
+  "playLevel": "16",
   "clubCode": "VBONE",
   "teamRank": "01",
   "regionCode": "SO",
@@ -628,17 +650,18 @@ Roster is opt-in via `expand=members` to keep the default response small.
 |---|---|---|
 | `id` | string | Team UUID |
 | `name` | string | Team name |
-| `teamCode` | string | Partner-facing operational Team Code generated from Team components. Used for matching, results, ranking, seeding, troubleshooting, and existing workflows. Not guaranteed unique; use Team UUID when uniqueness is required. |
-| `genderCode` | string | 1-character Team Code component |
-| `ageCode` | string | 2-digit Team Code component, with no `U` |
-| `clubCode` | string | 5-character partner-facing Club Code component |
-| `teamRank` | string | 2-digit team rank component, such as `01` |
-| `regionCode` | string | 2-character partner-facing Region Code component |
+| `teamCode` | string (nullable) | Standardized operational Team Code generated from the required component fields. Required to be unique across the USAV ecosystem. Returns `null` when a valid code cannot be generated. Team UUID remains the authoritative, immutable API identifier. |
+| `genderCode` | string | One-character Team Code component: `M`, `F`, or `C` |
+| `ageGroup` | string | One-character classification: `J` for Junior or `A` for Adult |
+| `playLevel` | string | Two-character junior age or adult play-level code |
+| `clubCode` | string | Five-character uppercase alphanumeric Club Code, unique within the Region |
+| `teamRank` | string | Two-digit, zero-padded rank such as `01` |
+| `regionCode` | string | Two-character USAV Region Code or three-character foreign code |
 | `clubId` | string | Parent club UUID |
 | `club` | object | Parent club details (full when `expand=club`) |
-| `ageDefinition` | string | Age definition: `7U` through `18U` |
+| `ageDefinition` | string (nullable) | Junior age definition: `7U` through `18U`. May be `null` for adult teams. |
 | `gender` | string | `Male`, `Female`, or `Coed` |
-| `division` | string (derived) | Display label combining `gender` and `ageDefinition` (e.g., `"Girls 16U"`) |
+| `division` | string (derived) | Display label derived from the Team’s gender, age group, and play level |
 | `type` | string | `Indoor`, `Beach`, or `Grass` |
 | `status` | string | `active` or `inactive` |
 | `members[]` | array | Roster, only when `expand=members` |
@@ -648,6 +671,8 @@ Roster is opt-in via `expand=members` to keep the default response small.
 | `members[].joinedAt` | timestamp | When the member joined the team |
 | `createdAt` | timestamp | When the team was created |
 
+The `ageDefinition` field represents junior age divisions. Adult classification is represented by `ageGroup` and `playLevel`. The derived `division` field provides a display label appropriate to the Team classification.
+
 The `gender` and `ageDefinition` enum values above are pending final confirmation with USAV national staff (see Open Questions).
 
 ---
@@ -656,7 +681,7 @@ The `gender` and `ageDefinition` enum values above are pending final confirmatio
 
 Profiles represent individual members in the USA Volleyball system. Each profile contains personal information, demographic data, suspensions, and education information.
 
-In v2.1 the Profile object exposes both `gender` (biological/birth gender, used for division and age-group eligibility) and `genderIdentity` (preferred display identity) as separate fields. Single-profile lookup is now available, and `graduationYear` is filterable on the list endpoint.
+The `ageDefinition` field represents junior age divisions. Adult classification is represented by `ageGroup` and `playLevel`. The derived `division` field provides a display label appropriate to the Team classification.
 
 #### List Profiles
 
