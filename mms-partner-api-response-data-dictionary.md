@@ -10,8 +10,6 @@ Required applies when the containing record is returned. Nullable means the fiel
 
 Definitions and constraints use the current API v2.1 documentation and the updated Sports Capital field-length file received October 13, 2026. The longest value observed in staging is not treated as a maximum length.
 
-For the Clubs, Profiles, Teams and Memberships list endpoints, the tables use the supplied object schemas; their list-item shapes still need confirmation.
-
 ## GET /api/v1/clubs
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
