@@ -1,603 +1,603 @@
-Endpoint,Section,Field,Qualified name,Definition,Required,Data type,Length,Nullable,Values / format
-GET /api/v1/clubs,Response fields,id,id,Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/clubs,Response fields,name,name,Club name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/clubs,Response fields,code,code,Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Response fields,regionId,regionId,Region UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/clubs,Response fields,region,region,Related Region details.,Yes,Object,N/A,No,N/A
-GET /api/v1/clubs,Response fields,affiliationStatus,affiliationStatus,Current Club affiliation status.,Yes,String,Maximum 11 characters,No,"Active, Inactive, InProgress, Archived, Unpaid, Pending, NotApproved"
-GET /api/v1/clubs,Response fields,affiliationStatusUpdatedAt,affiliationStatusUpdatedAt,Date and time the Club affiliation status last changed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/clubs,Response fields,type,type,Type or category of the club.,Yes,Array of strings,Each value: maximum 7 characters,No,"Indoor, Outdoor"
-GET /api/v1/clubs,Response fields,gender,gender,Gender value returned for the record.,Yes,Array of strings,Each value: maximum 6 characters,No,"Male, Female"
-GET /api/v1/clubs,Response fields,address,address,Address returned for the record.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/clubs,Response fields,contact,contact,Primary Club contact details.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/clubs,Response fields,location,location,Primary Club facility details.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/clubs,Response fields,logoUrl,logoUrl,URL of the Club logo image.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Response fields,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/clubs,Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/clubs,Response fields,metadata,metadata,Additional metadata returned with the record.,Yes,Object,N/A,No,N/A
-GET /api/v1/clubs,Region fields,id,region.id,Region UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/clubs,Region fields,name,region.name,Region name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/clubs,Region fields,code,region.code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Address fields,id,address.id,Address UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/clubs,Address fields,name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/clubs,Address fields,street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Address fields,addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Address fields,city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Address fields,state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Address fields,zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Contact fields,name,contact.name,Contact name.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Contact fields,email,contact.email,Email address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Contact fields,phone,contact.phone,Telephone number.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Contact fields,role,contact.role,Contact person's role or title.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Location fields,name,location.name,Location name.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Location fields,address,location.address,Address returned for the record.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Location fields,addressExtra,location.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Location fields,city,location.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Location fields,state,location.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs,Location fields,zipCode,location.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Response fields,id,id,Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/clubs/{id},Response fields,name,name,Club name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/clubs/{id},Response fields,code,code,Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Response fields,regionId,regionId,Region UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/clubs/{id},Response fields,region,region,Related Region details.,Yes,Object,N/A,No,N/A
-GET /api/v1/clubs/{id},Response fields,affiliationStatus,affiliationStatus,Current Club affiliation status.,Yes,String,Maximum 11 characters,No,"Active, Inactive, InProgress, Archived, Unpaid, Pending, NotApproved"
-GET /api/v1/clubs/{id},Response fields,affiliationStatusUpdatedAt,affiliationStatusUpdatedAt,Date and time the Club affiliation status last changed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/clubs/{id},Response fields,type,type,Type or category of the club.,Yes,Array of strings,Each value: maximum 7 characters,No,"Indoor, Outdoor"
-GET /api/v1/clubs/{id},Response fields,gender,gender,Gender value returned for the record.,Yes,Array of strings,Each value: maximum 6 characters,No,"Male, Female"
-GET /api/v1/clubs/{id},Response fields,address,address,Address returned for the record.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/clubs/{id},Response fields,contact,contact,Primary Club contact details.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/clubs/{id},Response fields,location,location,Primary Club facility details.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/clubs/{id},Response fields,logoUrl,logoUrl,URL of the Club logo image.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Response fields,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/clubs/{id},Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/clubs/{id},Response fields,metadata,metadata,Additional metadata returned with the record.,Yes,Object,N/A,No,N/A
-GET /api/v1/clubs/{id},Region fields,id,region.id,Region UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/clubs/{id},Region fields,name,region.name,Region name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/clubs/{id},Region fields,code,region.code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Address fields,id,address.id,Address UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/clubs/{id},Address fields,name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/clubs/{id},Address fields,street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Address fields,addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Address fields,city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Address fields,state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Address fields,zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Contact fields,name,contact.name,Contact name.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Contact fields,email,contact.email,Email address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Contact fields,phone,contact.phone,Telephone number.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Contact fields,role,contact.role,Contact person's role or title.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Location fields,name,location.name,Location name.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Location fields,address,location.address,Address returned for the record.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Location fields,addressExtra,location.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Location fields,city,location.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Location fields,state,location.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/clubs/{id},Location fields,zipCode,location.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/regions,Response fields,id,id,Region UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/regions,Response fields,name,name,Region name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/regions,Response fields,code,code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Response fields,id,id,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles,Response fields,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles,Response fields,firstName,firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles,Response fields,lastName,lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles,Response fields,middleName,middleName,Member middle name.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Response fields,birthDate,birthDate,Member date of birth.,Yes,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/profiles,Response fields,gender,gender,Member birth gender used for division and eligibility evaluation.,Yes,String,Maximum 6 characters,Yes,"Male, Female"
-GET /api/v1/profiles,Response fields,genderIdentity,genderIdentity,Preferred display gender identity.,Yes,String,Maximum 10 characters,Yes,"Male, Female, Non-binary"
-GET /api/v1/profiles,Response fields,phoneNumber,phoneNumber,Primary contact telephone number for the Profile.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Response fields,contactEmail,contactEmail,Primary contact email for the Profile.,Yes,String,No maximum defined,Yes,Not specified
-GET /api/v1/profiles,Response fields,status,status,Current status of the profile.,Yes,String,Maximum 8 characters,No,"active, inactive"
-GET /api/v1/profiles,Response fields,address,address,Address returned for the record.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/profiles,Response fields,guardians,guardians,Guardian relationships associated with the Profile.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/profiles,Response fields,suspensions,suspensions,Suspensions associated with the Profile.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/profiles,Response fields,demographics,demographics,Demographic information associated with the Profile.,Yes,Object,N/A,No,N/A
-GET /api/v1/profiles,Response fields,preferences,preferences,Preferences and consent values associated with the Profile.,Yes,Object,N/A,No,N/A
-GET /api/v1/profiles,Response fields,education,education,Education information associated with the Profile.,Yes,Object,N/A,No,N/A
-GET /api/v1/profiles,Response fields,avatarUrl,avatarUrl,URL of the Profile avatar image.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Response fields,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles,Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles,Address fields,id,address.id,Address UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles,Address fields,name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles,Address fields,street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Address fields,addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Address fields,city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Address fields,state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Address fields,zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Guardian fields,userId,guardians[].userId,Related user UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles,Guardian fields,email,guardians[].email,Email address.,Yes,String,No maximum defined,Yes,Not specified
-GET /api/v1/profiles,Guardian fields,isMainGuardian,guardians[].isMainGuardian,Whether this guardian is the primary guardian.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/profiles,Suspension fields,id,suspensions[].id,Suspension UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles,Suspension fields,profileId,suspensions[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles,Suspension fields,memberId,suspensions[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles,Suspension fields,scope,suspensions[].scope,Descriptor for the requested eligibility scope.,Yes,String,Maximum 13 characters,No,"global, role-specific"
-GET /api/v1/profiles,Suspension fields,affectedRoles,suspensions[].affectedRoles,Role codes affected by the suspension; empty or null indicates a global suspension.,Yes,Array of strings,Minimum 1; no maximum defined,Yes,N/A
-GET /api/v1/profiles,Suspension fields,reason,suspensions[].reason,Reason recorded for the suspension.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles,Suspension fields,startDate,suspensions[].startDate,Start date or start timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles,Suspension fields,endDate,suspensions[].endDate,End date or end timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/profiles,Suspension fields,canceledAt,suspensions[].canceledAt,Date and time the suspension was canceled or lifted.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/profiles,Suspension fields,createdAt,suspensions[].createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles,Suspension fields,updatedAt,suspensions[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles,Demographics fields,ethnicity,demographics.ethnicity,Ethnicity value recorded for the Profile.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles,Demographics fields,disability,demographics.disability,Whether the Profile records a disability indicator.,Yes,Boolean,N/A,Yes,N/A
-GET /api/v1/profiles,Demographics fields,militaryService,demographics.militaryService,Whether the Profile records military service.,Yes,Boolean,N/A,Yes,N/A
-GET /api/v1/profiles,Preferences fields,ncsaShareAgreed,preferences.ncsaShareAgreed,Whether the member agreed to NCSA data sharing.,Yes,Boolean,N/A,Yes,N/A
-GET /api/v1/profiles,Preferences fields,ncsaShareAgreedAt,preferences.ncsaShareAgreedAt,Date and time the NCSA sharing choice was recorded.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/profiles,Education fields,graduationYear,education.graduationYear,High-school graduation year.,Yes,Integer,N/A,Yes,N/A
-GET /api/v1/profiles/{id},Response fields,id,id,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles/{id},Response fields,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles/{id},Response fields,firstName,firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles/{id},Response fields,lastName,lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles/{id},Response fields,middleName,middleName,Member middle name.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Response fields,birthDate,birthDate,Member date of birth.,Yes,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/profiles/{id},Response fields,gender,gender,Member birth gender used for division and eligibility evaluation.,Yes,String,Maximum 6 characters,Yes,"Male, Female"
-GET /api/v1/profiles/{id},Response fields,genderIdentity,genderIdentity,Preferred display gender identity.,Yes,String,Maximum 10 characters,Yes,"Male, Female, Non-binary"
-GET /api/v1/profiles/{id},Response fields,phoneNumber,phoneNumber,Primary contact telephone number for the Profile.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Response fields,contactEmail,contactEmail,Primary contact email for the Profile.,Yes,String,No maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Response fields,status,status,Current status of the profile.,Yes,String,Maximum 8 characters,No,"active, inactive"
-GET /api/v1/profiles/{id},Response fields,address,address,Address returned for the record.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/profiles/{id},Response fields,guardians,guardians,Guardian relationships associated with the Profile.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/profiles/{id},Response fields,suspensions,suspensions,Suspensions associated with the Profile.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/profiles/{id},Response fields,demographics,demographics,Demographic information associated with the Profile.,Yes,Object,N/A,No,N/A
-GET /api/v1/profiles/{id},Response fields,preferences,preferences,Preferences and consent values associated with the Profile.,Yes,Object,N/A,No,N/A
-GET /api/v1/profiles/{id},Response fields,education,education,Education information associated with the Profile.,Yes,Object,N/A,No,N/A
-GET /api/v1/profiles/{id},Response fields,avatarUrl,avatarUrl,URL of the Profile avatar image.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Response fields,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles/{id},Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles/{id},Address fields,id,address.id,Address UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles/{id},Address fields,name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles/{id},Address fields,street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Address fields,addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Address fields,city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Address fields,state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Address fields,zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Guardian fields,userId,guardians[].userId,Related user UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles/{id},Guardian fields,email,guardians[].email,Email address.,Yes,String,No maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Guardian fields,isMainGuardian,guardians[].isMainGuardian,Whether this guardian is the primary guardian.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/profiles/{id},Suspension fields,id,suspensions[].id,Suspension UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles/{id},Suspension fields,profileId,suspensions[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/profiles/{id},Suspension fields,memberId,suspensions[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles/{id},Suspension fields,scope,suspensions[].scope,Descriptor for the requested eligibility scope.,Yes,String,Maximum 13 characters,No,"global, role-specific"
-GET /api/v1/profiles/{id},Suspension fields,affectedRoles,suspensions[].affectedRoles,Role codes affected by the suspension; empty or null indicates a global suspension.,Yes,Array of strings,Minimum 1; no maximum defined,Yes,N/A
-GET /api/v1/profiles/{id},Suspension fields,reason,suspensions[].reason,Reason recorded for the suspension.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/profiles/{id},Suspension fields,startDate,suspensions[].startDate,Start date or start timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles/{id},Suspension fields,endDate,suspensions[].endDate,End date or end timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/profiles/{id},Suspension fields,canceledAt,suspensions[].canceledAt,Date and time the suspension was canceled or lifted.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/profiles/{id},Suspension fields,createdAt,suspensions[].createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles/{id},Suspension fields,updatedAt,suspensions[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/profiles/{id},Demographics fields,ethnicity,demographics.ethnicity,Ethnicity value recorded for the Profile.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/profiles/{id},Demographics fields,disability,demographics.disability,Whether the Profile records a disability indicator.,Yes,Boolean,N/A,Yes,N/A
-GET /api/v1/profiles/{id},Demographics fields,militaryService,demographics.militaryService,Whether the Profile records military service.,Yes,Boolean,N/A,Yes,N/A
-GET /api/v1/profiles/{id},Preferences fields,ncsaShareAgreed,preferences.ncsaShareAgreed,Whether the member agreed to NCSA data sharing.,Yes,Boolean,N/A,Yes,N/A
-GET /api/v1/profiles/{id},Preferences fields,ncsaShareAgreedAt,preferences.ncsaShareAgreedAt,Date and time the NCSA sharing choice was recorded.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/profiles/{id},Education fields,graduationYear,education.graduationYear,High-school graduation year.,Yes,Integer,N/A,Yes,N/A
-GET /api/v1/teams,Response fields,id,id,Team UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams,Response fields,name,name,Team name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams,Response fields,clubId,clubId,Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams,Response fields,club,club,Related Club details.,No,Object,N/A,No,N/A
-GET /api/v1/teams,Response fields,ageDefinition,ageDefinition,Junior age division assigned to the Team; may be null for adult Teams.,Yes,String,Maximum 3 characters,Yes,"8U, 9U, 10U, 11U, 12U, 13U, 14U, 15U, 16U, 17U, 18U"
-GET /api/v1/teams,Response fields,gender,gender,Gender value returned for the record.,Yes,String,Maximum 6 characters,No,"Male, Female, Co-Ed"
-GET /api/v1/teams,Response fields,division,division,Display label derived from the Team classification.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/teams,Response fields,type,type,Type or category of the team.,Yes,String,Maximum 6 characters,Yes,"Indoor, Beach, Grass"
-GET /api/v1/teams,Response fields,status,status,Current status of the team.,Yes,String,Maximum 8 characters,No,"active, inactive"
-GET /api/v1/teams,Response fields,teamCode,teamCode,Standardized operational Team Code generated from the Team Code components.,Yes,String,13 or 14 characters,Yes,genderCode + ageGroup + playLevel + clubCode + teamRank + regionCode; unique across USAV; Team UUID remains authoritative
-GET /api/v1/teams,Response fields,genderCode,genderCode,One-character gender component used in Team Code.,Yes,String,1 character,Yes,"M, F, C"
-GET /api/v1/teams,Response fields,ageGroup,ageGroup,Team classification used in Team Code: Junior or Adult.,Yes,String,1 character,Yes,"J, A"
-GET /api/v1/teams,Response fields,playLevel,playLevel,Two-character junior age or adult play-level component used in Team Code.,Yes,String,2 characters,Yes,Two uppercase letters or digits; approved play-level values are not fully specified
-GET /api/v1/teams,Response fields,clubCode,clubCode,Club Code component used in Team Code or the scoped Club code.,Yes,String,5 characters,Yes,Five uppercase letters or digits; unique within Region
-GET /api/v1/teams,Response fields,teamRank,teamRank,Two-digit Team rank component used in Team Code.,Yes,String,2 characters,Yes,"Two digits, zero-padded (for example, 01)"
-GET /api/v1/teams,Response fields,regionCode,regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",Yes,String,2 to 3 characters,Yes,Two-character USAV Region Code or three-character foreign code
-GET /api/v1/teams,Response fields,teamCodeComponents,teamCodeComponents,Individual values used to construct Team Code.,Yes,Object,N/A,No,N/A
-GET /api/v1/teams,Response fields,members,members,Team roster returned when member expansion is requested.,No,Array of objects,N/A,No,N/A
-GET /api/v1/teams,Response fields,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/teams,Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/teams,Club fields,id,club.id,Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams,Club fields,name,club.name,Club name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams,Club fields,code,club.code,Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/teams,Team Code Components fields,genderCode,teamCodeComponents.genderCode,One-character gender component used in Team Code.,Yes,String,1 character,Yes,"M, F, C"
-GET /api/v1/teams,Team Code Components fields,ageGroup,teamCodeComponents.ageGroup,Team classification used in Team Code: Junior or Adult.,Yes,String,1 character,Yes,"J, A"
-GET /api/v1/teams,Team Code Components fields,playLevel,teamCodeComponents.playLevel,Two-character junior age or adult play-level component used in Team Code.,Yes,String,2 characters,Yes,Two uppercase letters or digits; approved play-level values are not fully specified
-GET /api/v1/teams,Team Code Components fields,clubCode,teamCodeComponents.clubCode,Club Code component used in Team Code or the scoped Club code.,Yes,String,5 characters,Yes,Five uppercase letters or digits; unique within Region
-GET /api/v1/teams,Team Code Components fields,teamRank,teamCodeComponents.teamRank,Two-digit Team rank component used in Team Code.,Yes,String,2 characters,Yes,"Two digits, zero-padded (for example, 01)"
-GET /api/v1/teams,Team Code Components fields,regionCode,teamCodeComponents.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",Yes,String,2 to 3 characters,Yes,Two-character USAV Region Code or three-character foreign code
-GET /api/v1/teams,Team Member fields,profileId,members[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams,Team Member fields,profile,members[].profile,Related member Profile details.,Yes,Object,N/A,No,N/A
-GET /api/v1/teams,Team Member fields,role,members[].role,Member role on the Team.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/teams,Team Member fields,joinedAt,members[].joinedAt,Date and time the member joined the Team.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/teams,Team Member Profile fields,id,members[].profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams,Team Member Profile fields,memberId,members[].profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams,Team Member Profile fields,firstName,members[].profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams,Team Member Profile fields,lastName,members[].profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams,Team Member Profile fields,birthDate,members[].profile.birthDate,Member date of birth.,Yes,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/teams,Team Member Profile fields,gender,members[].profile.gender,Member birth gender used for division and eligibility evaluation.,Yes,String,Maximum 6 characters,Yes,"Male, Female"
-GET /api/v1/teams/{id},Response fields,id,id,Team UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams/{id},Response fields,name,name,Team name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams/{id},Response fields,clubId,clubId,Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams/{id},Response fields,club,club,Related Club details.,No,Object,N/A,No,N/A
-GET /api/v1/teams/{id},Response fields,ageDefinition,ageDefinition,Junior age division assigned to the Team; may be null for adult Teams.,Yes,String,Maximum 3 characters,Yes,"8U, 9U, 10U, 11U, 12U, 13U, 14U, 15U, 16U, 17U, 18U"
-GET /api/v1/teams/{id},Response fields,gender,gender,Gender value returned for the record.,Yes,String,Maximum 6 characters,No,"Male, Female, Co-Ed"
-GET /api/v1/teams/{id},Response fields,division,division,Display label derived from the Team classification.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/teams/{id},Response fields,type,type,Type or category of the team.,Yes,String,Maximum 6 characters,Yes,"Indoor, Beach, Grass"
-GET /api/v1/teams/{id},Response fields,status,status,Current status of the team.,Yes,String,Maximum 8 characters,No,"active, inactive"
-GET /api/v1/teams/{id},Response fields,teamCode,teamCode,Standardized operational Team Code generated from the Team Code components.,Yes,String,13 or 14 characters,Yes,genderCode + ageGroup + playLevel + clubCode + teamRank + regionCode; unique across USAV; Team UUID remains authoritative
-GET /api/v1/teams/{id},Response fields,genderCode,genderCode,One-character gender component used in Team Code.,Yes,String,1 character,Yes,"M, F, C"
-GET /api/v1/teams/{id},Response fields,ageGroup,ageGroup,Team classification used in Team Code: Junior or Adult.,Yes,String,1 character,Yes,"J, A"
-GET /api/v1/teams/{id},Response fields,playLevel,playLevel,Two-character junior age or adult play-level component used in Team Code.,Yes,String,2 characters,Yes,Two uppercase letters or digits; approved play-level values are not fully specified
-GET /api/v1/teams/{id},Response fields,clubCode,clubCode,Club Code component used in Team Code or the scoped Club code.,Yes,String,5 characters,Yes,Five uppercase letters or digits; unique within Region
-GET /api/v1/teams/{id},Response fields,teamRank,teamRank,Two-digit Team rank component used in Team Code.,Yes,String,2 characters,Yes,"Two digits, zero-padded (for example, 01)"
-GET /api/v1/teams/{id},Response fields,regionCode,regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",Yes,String,2 to 3 characters,Yes,Two-character USAV Region Code or three-character foreign code
-GET /api/v1/teams/{id},Response fields,teamCodeComponents,teamCodeComponents,Individual values used to construct Team Code.,Yes,Object,N/A,No,N/A
-GET /api/v1/teams/{id},Response fields,members,members,Team roster returned when member expansion is requested.,No,Array of objects,N/A,No,N/A
-GET /api/v1/teams/{id},Response fields,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/teams/{id},Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/teams/{id},Club fields,id,club.id,Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams/{id},Club fields,name,club.name,Club name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams/{id},Club fields,code,club.code,Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/teams/{id},Team Code Components fields,genderCode,teamCodeComponents.genderCode,One-character gender component used in Team Code.,Yes,String,1 character,Yes,"M, F, C"
-GET /api/v1/teams/{id},Team Code Components fields,ageGroup,teamCodeComponents.ageGroup,Team classification used in Team Code: Junior or Adult.,Yes,String,1 character,Yes,"J, A"
-GET /api/v1/teams/{id},Team Code Components fields,playLevel,teamCodeComponents.playLevel,Two-character junior age or adult play-level component used in Team Code.,Yes,String,2 characters,Yes,Two uppercase letters or digits; approved play-level values are not fully specified
-GET /api/v1/teams/{id},Team Code Components fields,clubCode,teamCodeComponents.clubCode,Club Code component used in Team Code or the scoped Club code.,Yes,String,5 characters,Yes,Five uppercase letters or digits; unique within Region
-GET /api/v1/teams/{id},Team Code Components fields,teamRank,teamCodeComponents.teamRank,Two-digit Team rank component used in Team Code.,Yes,String,2 characters,Yes,"Two digits, zero-padded (for example, 01)"
-GET /api/v1/teams/{id},Team Code Components fields,regionCode,teamCodeComponents.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",Yes,String,2 to 3 characters,Yes,Two-character USAV Region Code or three-character foreign code
-GET /api/v1/teams/{id},Team Member fields,profileId,members[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams/{id},Team Member fields,profile,members[].profile,Related member Profile details.,Yes,Object,N/A,No,N/A
-GET /api/v1/teams/{id},Team Member fields,role,members[].role,Member role on the Team.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/teams/{id},Team Member fields,joinedAt,members[].joinedAt,Date and time the member joined the Team.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/teams/{id},Team Member Profile fields,id,members[].profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/teams/{id},Team Member Profile fields,memberId,members[].profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams/{id},Team Member Profile fields,firstName,members[].profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams/{id},Team Member Profile fields,lastName,members[].profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/teams/{id},Team Member Profile fields,birthDate,members[].profile.birthDate,Member date of birth.,Yes,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/teams/{id},Team Member Profile fields,gender,members[].profile.gender,Member birth gender used for division and eligibility evaluation.,Yes,String,Maximum 6 characters,Yes,"Male, Female"
-GET /api/v1/memberships,Response fields,id,id,Membership UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Response fields,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Response fields,profile,profile,Related member Profile details.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships,Response fields,userId,userId,Related user UUID.,Yes,String (UUID),36 characters,Yes,UUID
-GET /api/v1/memberships,Response fields,regionId,regionId,Region UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Response fields,region,region,Related Region details.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships,Response fields,status,status,Current status of the membership.,Yes,String,Maximum 9 characters,No,"Paid, Unpaid, Canceled, Suspended, Expired"
-GET /api/v1/memberships,Response fields,startDate,startDate,Start date or start timestamp for the record.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/memberships,Response fields,endDate,endDate,End date or end timestamp for the record.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/memberships,Response fields,roles,roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/memberships,Response fields,address,address,Address returned for the record.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/memberships,Response fields,payment,payment,Payment details associated with the membership.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/memberships,Response fields,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships,Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships,Profile fields,id,profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Profile fields,memberId,profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Profile fields,firstName,profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Profile fields,lastName,profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Region fields,id,region.id,Region UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Region fields,name,region.name,Region name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Region fields,code,region.code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships,Membership Role fields,id,roles[].id,Membership Role UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Membership Role fields,membershipRoleId,roles[].membershipRoleId,Role definition UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Membership Role fields,role,roles[].role,Role code evaluated for eligibility.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships,Membership Role fields,tierId,roles[].tierId,Membership tier UUID.,Yes,String (UUID),36 characters,Yes,UUID
-GET /api/v1/memberships,Membership Role fields,tier,roles[].tier,Membership tier details.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/memberships,Membership Role fields,status,roles[].status,Current status of the membership role.,Yes,String,Maximum 8 characters,No,"Active, Removed, Unpaid, Upgraded"
-GET /api/v1/memberships,Membership Role fields,clubAssignment,roles[].clubAssignment,Club assignment associated with the membership role.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/memberships,Membership Role fields,eligibility,roles[].eligibility,Eligibility summary stored with the membership role.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships,Membership Role fields,credentials,roles[].credentials,Credential requirements associated with the membership role.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/memberships,Membership Role fields,waivers,roles[].waivers,Waivers associated with the membership role.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/memberships,Membership Role fields,updatedAt,roles[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships,Role fields,id,roles[].role.id,Role UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Role fields,name,roles[].role.name,Role name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Tier fields,id,roles[].tier.id,Tier UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Tier fields,name,roles[].tier.name,Tier name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Tier fields,length,roles[].tier.length,Human-readable membership tier duration.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships,Tier fields,category,roles[].tier.category,Membership tier category.,Yes,String,Maximum 7 characters,Yes,"Full, Limited"
-GET /api/v1/memberships,Tier fields,windowType,roles[].tier.windowType,Method used to determine the membership tier validity window.,Yes,String,Maximum 10 characters,Yes,"FullSeason, Days, DateRange"
-GET /api/v1/memberships,Tier fields,durationDays,roles[].tier.durationDays,Number of days in a fixed-duration membership tier.,Yes,Integer,N/A,Yes,N/A
-GET /api/v1/memberships,Tier fields,windowStart,roles[].tier.windowStart,Start date of an explicit membership tier validity window.,Yes,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/memberships,Tier fields,windowEnd,roles[].tier.windowEnd,End date of an explicit membership tier validity window.,Yes,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/memberships,Tier fields,restrictions,roles[].tier.restrictions,Restrictions associated with the membership tier.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships,Tier Restrictions fields,maxRoles,roles[].tier.restrictions.maxRoles,Maximum number of roles allowed by the membership tier.,Yes,Integer,N/A,Yes,N/A
-GET /api/v1/memberships,Tier Restrictions fields,allowedTypes,roles[].tier.restrictions.allowedTypes,Volleyball types allowed by the membership tier.,Yes,Array of strings,Each value: maximum 7 characters,No,"Indoor, Outdoor"
-GET /api/v1/memberships,Club Assignment fields,clubId,roles[].clubAssignment.clubId,Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Club Assignment fields,club,roles[].clubAssignment.club,Related Club details.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships,Club Assignment fields,status,roles[].clubAssignment.status,Current status of the club assignment.,Yes,String,Maximum 11 characters,No,"APPROVED, REJECTED, IN_TRANSFER"
-GET /api/v1/memberships,Club Assignment fields,assignedAt,roles[].clubAssignment.assignedAt,Date and time the Club assignment was made.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships,Assigned Club fields,id,roles[].clubAssignment.club.id,Assigned Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Assigned Club fields,name,roles[].clubAssignment.club.name,Assigned Club name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Assigned Club fields,code,roles[].clubAssignment.club.code,Assigned Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships,Role Eligibility fields,isEligible,roles[].eligibility.isEligible,Stored eligibility indicator for the membership role.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/memberships,Role Eligibility fields,reasons,roles[].eligibility.reasons,Reasons supporting the stored eligibility result.,Yes,Array of strings,No maximum defined,No,N/A
-GET /api/v1/memberships,Role Credential fields,id,roles[].credentials[].id,Role Credential UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Role Credential fields,profileId,roles[].credentials[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Role Credential fields,memberId,roles[].credentials[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Role Credential fields,credentialId,roles[].credentials[].credentialId,Credential definition UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Role Credential fields,credential,roles[].credentials[].credential,Credential definition associated with the credential assignment.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships,Role Credential fields,status,roles[].credentials[].status,Current status of the role credential.,Yes,String,Maximum 10 characters,No,"Completed, InProgress, NotStarted, Cancelled, Submitted, Failed"
-GET /api/v1/memberships,Role Credential fields,requiredFrom,roles[].credentials[].requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships,Role Credential fields,completedAt,roles[].credentials[].completedAt,Date and time the credential or transfer was completed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships,Role Credential fields,validUntil,roles[].credentials[].validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC; expiration-boundary meaning remains unresolved
-GET /api/v1/memberships,Role Credential fields,updatedAt,roles[].credentials[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships,Credential Definition fields,id,roles[].credentials[].credential.id,Credential definition UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Credential Definition fields,name,roles[].credentials[].credential.name,Credential definition name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Credential Definition fields,type,roles[].credentials[].credential.type,Type or category of the credential definition.,Yes,String,Maximum 9 characters,Yes,"SAFESPORT, LITMOS, NCSI"
-GET /api/v1/memberships,Role Waiver fields,id,roles[].waivers[].id,Role Waiver UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Role Waiver fields,profileId,roles[].waivers[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Role Waiver fields,memberId,roles[].waivers[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Role Waiver fields,type,roles[].waivers[].type,Type or category of the role waiver.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Role Waiver fields,status,roles[].waivers[].status,Current status of the role waiver.,Yes,String,Maximum 9 characters,No,Published
-GET /api/v1/memberships,Role Waiver fields,requiredFrom,roles[].waivers[].requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships,Role Waiver fields,signedAt,roles[].waivers[].signedAt,Date and time the member signed the waiver.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships,Role Waiver fields,validUntil,roles[].waivers[].validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC; expiration-boundary meaning remains unresolved
-GET /api/v1/memberships,Role Waiver fields,version,roles[].waivers[].version,Waiver version.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships,Role Waiver fields,updatedAt,roles[].waivers[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships,Address fields,id,address.id,Address UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships,Address fields,name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Address fields,street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships,Address fields,addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships,Address fields,city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships,Address fields,state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships,Address fields,zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships,Payment fields,amount,payment.amount,Payment amount.,Yes,Number,N/A,No,N/A
-GET /api/v1/memberships,Payment fields,currency,payment.currency,Currency used for the payment.,Yes,String,3 characters,No,Not specified
-GET /api/v1/memberships,Payment fields,method,payment.method,Payment method.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships,Payment fields,transactionId,payment.transactionId,Payment processor transaction identifier.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Response fields,id,id,Membership UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Response fields,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Response fields,profile,profile,Related member Profile details.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships/{id},Response fields,userId,userId,Related user UUID.,Yes,String (UUID),36 characters,Yes,UUID
-GET /api/v1/memberships/{id},Response fields,regionId,regionId,Region UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Response fields,region,region,Related Region details.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships/{id},Response fields,status,status,Current status of the membership.,Yes,String,Maximum 9 characters,No,"Paid, Unpaid, Canceled, Suspended, Expired"
-GET /api/v1/memberships/{id},Response fields,startDate,startDate,Start date or start timestamp for the record.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/memberships/{id},Response fields,endDate,endDate,End date or end timestamp for the record.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/memberships/{id},Response fields,roles,roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/memberships/{id},Response fields,address,address,Address returned for the record.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/memberships/{id},Response fields,payment,payment,Payment details associated with the membership.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/memberships/{id},Response fields,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships/{id},Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships/{id},Profile fields,id,profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Profile fields,memberId,profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Profile fields,firstName,profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Profile fields,lastName,profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Region fields,id,region.id,Region UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Region fields,name,region.name,Region name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Region fields,code,region.code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Membership Role fields,id,roles[].id,Membership Role UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Membership Role fields,membershipRoleId,roles[].membershipRoleId,Role definition UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Membership Role fields,role,roles[].role,Role code evaluated for eligibility.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships/{id},Membership Role fields,tierId,roles[].tierId,Membership tier UUID.,Yes,String (UUID),36 characters,Yes,UUID
-GET /api/v1/memberships/{id},Membership Role fields,tier,roles[].tier,Membership tier details.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/memberships/{id},Membership Role fields,status,roles[].status,Current status of the membership role.,Yes,String,Maximum 8 characters,No,"Active, Removed, Unpaid, Upgraded"
-GET /api/v1/memberships/{id},Membership Role fields,clubAssignment,roles[].clubAssignment,Club assignment associated with the membership role.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/memberships/{id},Membership Role fields,eligibility,roles[].eligibility,Eligibility summary stored with the membership role.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships/{id},Membership Role fields,credentials,roles[].credentials,Credential requirements associated with the membership role.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/memberships/{id},Membership Role fields,waivers,roles[].waivers,Waivers associated with the membership role.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/memberships/{id},Membership Role fields,updatedAt,roles[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships/{id},Role fields,id,roles[].role.id,Role UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Role fields,name,roles[].role.name,Role name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Tier fields,id,roles[].tier.id,Tier UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Tier fields,name,roles[].tier.name,Tier name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Tier fields,length,roles[].tier.length,Human-readable membership tier duration.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Tier fields,category,roles[].tier.category,Membership tier category.,Yes,String,Maximum 7 characters,Yes,"Full, Limited"
-GET /api/v1/memberships/{id},Tier fields,windowType,roles[].tier.windowType,Method used to determine the membership tier validity window.,Yes,String,Maximum 10 characters,Yes,"FullSeason, Days, DateRange"
-GET /api/v1/memberships/{id},Tier fields,durationDays,roles[].tier.durationDays,Number of days in a fixed-duration membership tier.,Yes,Integer,N/A,Yes,N/A
-GET /api/v1/memberships/{id},Tier fields,windowStart,roles[].tier.windowStart,Start date of an explicit membership tier validity window.,Yes,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/memberships/{id},Tier fields,windowEnd,roles[].tier.windowEnd,End date of an explicit membership tier validity window.,Yes,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/memberships/{id},Tier fields,restrictions,roles[].tier.restrictions,Restrictions associated with the membership tier.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships/{id},Tier Restrictions fields,maxRoles,roles[].tier.restrictions.maxRoles,Maximum number of roles allowed by the membership tier.,Yes,Integer,N/A,Yes,N/A
-GET /api/v1/memberships/{id},Tier Restrictions fields,allowedTypes,roles[].tier.restrictions.allowedTypes,Volleyball types allowed by the membership tier.,Yes,Array of strings,Each value: maximum 7 characters,No,"Indoor, Outdoor"
-GET /api/v1/memberships/{id},Club Assignment fields,clubId,roles[].clubAssignment.clubId,Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Club Assignment fields,club,roles[].clubAssignment.club,Related Club details.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships/{id},Club Assignment fields,status,roles[].clubAssignment.status,Current status of the club assignment.,Yes,String,Maximum 11 characters,No,"APPROVED, REJECTED, IN_TRANSFER"
-GET /api/v1/memberships/{id},Club Assignment fields,assignedAt,roles[].clubAssignment.assignedAt,Date and time the Club assignment was made.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships/{id},Assigned Club fields,id,roles[].clubAssignment.club.id,Assigned Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Assigned Club fields,name,roles[].clubAssignment.club.name,Assigned Club name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Assigned Club fields,code,roles[].clubAssignment.club.code,Assigned Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Role Eligibility fields,isEligible,roles[].eligibility.isEligible,Stored eligibility indicator for the membership role.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/memberships/{id},Role Eligibility fields,reasons,roles[].eligibility.reasons,Reasons supporting the stored eligibility result.,Yes,Array of strings,No maximum defined,No,N/A
-GET /api/v1/memberships/{id},Role Credential fields,id,roles[].credentials[].id,Role Credential UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Role Credential fields,profileId,roles[].credentials[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Role Credential fields,memberId,roles[].credentials[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Role Credential fields,credentialId,roles[].credentials[].credentialId,Credential definition UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Role Credential fields,credential,roles[].credentials[].credential,Credential definition associated with the credential assignment.,Yes,Object,N/A,No,N/A
-GET /api/v1/memberships/{id},Role Credential fields,status,roles[].credentials[].status,Current status of the role credential.,Yes,String,Maximum 10 characters,No,"Completed, InProgress, NotStarted, Cancelled, Submitted, Failed"
-GET /api/v1/memberships/{id},Role Credential fields,requiredFrom,roles[].credentials[].requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships/{id},Role Credential fields,completedAt,roles[].credentials[].completedAt,Date and time the credential or transfer was completed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships/{id},Role Credential fields,validUntil,roles[].credentials[].validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC; expiration-boundary meaning remains unresolved
-GET /api/v1/memberships/{id},Role Credential fields,updatedAt,roles[].credentials[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships/{id},Credential Definition fields,id,roles[].credentials[].credential.id,Credential definition UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Credential Definition fields,name,roles[].credentials[].credential.name,Credential definition name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Credential Definition fields,type,roles[].credentials[].credential.type,Type or category of the credential definition.,Yes,String,Maximum 9 characters,Yes,"SAFESPORT, LITMOS, NCSI"
-GET /api/v1/memberships/{id},Role Waiver fields,id,roles[].waivers[].id,Role Waiver UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Role Waiver fields,profileId,roles[].waivers[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Role Waiver fields,memberId,roles[].waivers[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Role Waiver fields,type,roles[].waivers[].type,Type or category of the role waiver.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Role Waiver fields,status,roles[].waivers[].status,Current status of the role waiver.,Yes,String,Maximum 9 characters,No,Published
-GET /api/v1/memberships/{id},Role Waiver fields,requiredFrom,roles[].waivers[].requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships/{id},Role Waiver fields,signedAt,roles[].waivers[].signedAt,Date and time the member signed the waiver.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/memberships/{id},Role Waiver fields,validUntil,roles[].waivers[].validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC; expiration-boundary meaning remains unresolved
-GET /api/v1/memberships/{id},Role Waiver fields,version,roles[].waivers[].version,Waiver version.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Role Waiver fields,updatedAt,roles[].waivers[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/memberships/{id},Address fields,id,address.id,Address UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/memberships/{id},Address fields,name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Address fields,street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Address fields,addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Address fields,city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Address fields,state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Address fields,zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/memberships/{id},Payment fields,amount,payment.amount,Payment amount.,Yes,Number,N/A,No,N/A
-GET /api/v1/memberships/{id},Payment fields,currency,payment.currency,Currency used for the payment.,Yes,String,3 characters,No,Not specified
-GET /api/v1/memberships/{id},Payment fields,method,payment.method,Payment method.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/memberships/{id},Payment fields,transactionId,payment.transactionId,Payment processor transaction identifier.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/credentials,Response fields,id,id,Credential assignment UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/credentials,Response fields,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/credentials,Response fields,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/credentials,Response fields,credentialId,credentialId,Credential definition UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/credentials,Response fields,credential,credential,Credential definition associated with the credential assignment.,Yes,Object,N/A,No,N/A
-GET /api/v1/credentials,Response fields,status,status,Current status of the credential assignment.,Yes,String,Maximum 10 characters,No,"Completed, InProgress, NotStarted, Cancelled, Submitted, Failed"
-GET /api/v1/credentials,Response fields,requiredFrom,requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/credentials,Response fields,completedAt,completedAt,Date and time the credential or transfer was completed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/credentials,Response fields,validUntil,validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC; expiration-boundary meaning remains unresolved
-GET /api/v1/credentials,Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/credentials,Credential Definition fields,id,credential.id,Credential definition UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/credentials,Credential Definition fields,name,credential.name,Credential definition name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/credentials,Credential Definition fields,type,credential.type,Type or category of the credential definition.,Yes,String,Maximum 9 characters,Yes,"SAFESPORT, LITMOS, NCSI"
-GET /api/v1/waivers,Response fields,id,id,Composite identifier for the waiver.,Yes,String (composite ID),No maximum defined,No,Not specified
-GET /api/v1/waivers,Response fields,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/waivers,Response fields,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/waivers,Response fields,type,type,Type or category of the waiver.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/waivers,Response fields,status,status,Current status of the waiver.,Yes,String,Maximum 9 characters,No,Published
-GET /api/v1/waivers,Response fields,requiredFrom,requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/waivers,Response fields,signedAt,signedAt,Date and time the member signed the waiver.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/waivers,Response fields,validUntil,validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC; expiration-boundary meaning remains unresolved
-GET /api/v1/waivers,Response fields,version,version,Waiver version.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/waivers,Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/suspensions,Response fields,id,id,Suspension UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/suspensions,Response fields,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/suspensions,Response fields,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/suspensions,Response fields,scope,scope,Descriptor for the requested eligibility scope.,Yes,String,Maximum 13 characters,No,"global, role-specific"
-GET /api/v1/suspensions,Response fields,affectedRoles,affectedRoles,Role codes affected by the suspension; empty or null indicates a global suspension.,Yes,Array of strings,Minimum 1; no maximum defined,Yes,N/A
-GET /api/v1/suspensions,Response fields,reason,reason,Reason recorded for the suspension.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/suspensions,Response fields,startDate,startDate,Start date or start timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/suspensions,Response fields,endDate,endDate,End date or end timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/suspensions,Response fields,canceledAt,canceledAt,Date and time the suspension was canceled or lifted.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/suspensions,Response fields,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/suspensions,Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/club-transfers,Response fields,id,id,Club transfer UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/club-transfers,Response fields,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/club-transfers,Response fields,profile,profile,Related member Profile details.,Yes,Object,N/A,No,N/A
-GET /api/v1/club-transfers,Response fields,fromClubId,fromClubId,Source Club UUID for the transfer.,Yes,String (UUID),36 characters,Yes,UUID
-GET /api/v1/club-transfers,Response fields,fromClub,fromClub,Source Club details for the transfer.,Yes,Object,N/A,Yes,N/A
-GET /api/v1/club-transfers,Response fields,toClubId,toClubId,Destination Club UUID for the transfer.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/club-transfers,Response fields,toClub,toClub,Destination Club details for the transfer.,Yes,Object,N/A,No,N/A
-GET /api/v1/club-transfers,Response fields,status,status,Current status of the club transfer.,Yes,String,Maximum 10 characters,No,"Approved, Rejected, InTransfer"
-GET /api/v1/club-transfers,Response fields,requestedAt,requestedAt,Date and time the Club transfer was requested.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/club-transfers,Response fields,completedAt,completedAt,Date and time the credential or transfer was completed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,ISO 8601 UTC
-GET /api/v1/club-transfers,Response fields,requestedBy,requestedBy,Identifier of the user who requested the Club transfer.,Yes,String,36 characters,Yes,UUID
-GET /api/v1/club-transfers,Response fields,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,ISO 8601 UTC
-GET /api/v1/club-transfers,Profile fields,id,profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/club-transfers,Profile fields,memberId,profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/club-transfers,Profile fields,firstName,profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/club-transfers,Profile fields,lastName,profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/club-transfers,Previous Club fields,id,fromClub.id,Previous Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/club-transfers,Previous Club fields,name,fromClub.name,Previous Club name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/club-transfers,Previous Club fields,code,fromClub.code,Previous Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/club-transfers,Destination Club fields,id,toClub.id,Destination Club UUID.,Yes,String (UUID),36 characters,No,UUID
-GET /api/v1/club-transfers,Destination Club fields,name,toClub.name,Destination Club name.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/club-transfers,Destination Club fields,code,toClub.code,Destination Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-POST /api/v1/eligibility/batch,Response fields,windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-POST /api/v1/eligibility/batch,Response fields,windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-POST /api/v1/eligibility/batch,Member Result fields,memberId,data[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-POST /api/v1/eligibility/batch,Member Result fields,memberFound,data[].memberFound,Whether the requested USAV member was found.,Yes,Boolean,N/A,No,N/A
-POST /api/v1/eligibility/batch,Member Result fields,firstName,data[].firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,Not specified
-POST /api/v1/eligibility/batch,Member Result fields,lastName,data[].lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,Not specified
-POST /api/v1/eligibility/batch,Member Result fields,birthDate,data[].birthDate,Member date of birth.,No,String (date),10 characters,Yes,YYYY-MM-DD
-POST /api/v1/eligibility/batch,Member Result fields,gender,data[].gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female"
-POST /api/v1/eligibility/batch,Member Result fields,graduationYear,data[].graduationYear,High-school graduation year.,No,Integer,N/A,Yes,N/A
-POST /api/v1/eligibility/batch,Member Result fields,windowStart,data[].windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-POST /api/v1/eligibility/batch,Member Result fields,windowEnd,data[].windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-POST /api/v1/eligibility/batch,Member Result fields,roles,data[].roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,N/A
-POST /api/v1/eligibility/batch,Role Evaluation fields,role,data[].roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-POST /api/v1/eligibility/batch,Role Evaluation fields,tier,data[].roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-POST /api/v1/eligibility/batch,Role Evaluation fields,eligible,data[].roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-POST /api/v1/eligibility/batch,Role Evaluation fields,conditions,data[].roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,N/A
-POST /api/v1/eligibility/batch,Eligibility Condition fields,condition,data[].roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-POST /api/v1/eligibility/batch,Eligibility Condition fields,passed,data[].roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-POST /api/v1/eligibility/batch,Eligibility Condition fields,details,data[].roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,N/A
-GET /api/v1/eligibility/club/{clubId},Response fields,scope,scope,Descriptor for the requested eligibility scope.,Yes,Object,N/A,No,N/A
-GET /api/v1/eligibility/club/{clubId},Response fields,windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/club/{clubId},Response fields,windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/club/{clubId},Member Result fields,memberId,data[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/club/{clubId},Member Result fields,memberFound,data[].memberFound,Whether the requested USAV member was found.,No,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/club/{clubId},Member Result fields,firstName,data[].firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/club/{clubId},Member Result fields,lastName,data[].lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/club/{clubId},Member Result fields,birthDate,data[].birthDate,Member date of birth.,No,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/eligibility/club/{clubId},Member Result fields,gender,data[].gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female"
-GET /api/v1/eligibility/club/{clubId},Member Result fields,graduationYear,data[].graduationYear,High-school graduation year.,No,Integer,N/A,Yes,N/A
-GET /api/v1/eligibility/club/{clubId},Member Result fields,windowStart,data[].windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/club/{clubId},Member Result fields,windowEnd,data[].windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/club/{clubId},Member Result fields,roles,data[].roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/eligibility/club/{clubId},Scope fields,type,scope.type,Type of eligibility scope requested.,Yes,String,Maximum 6 characters,No,"club, team, region"
-GET /api/v1/eligibility/club/{clubId},Scope fields,clubId,scope.clubId,Club UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/eligibility/club/{clubId},Scope fields,clubName,scope.clubName,Club display name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/club/{clubId},Scope fields,clubCode,scope.clubCode,Club Code component used in Team Code or the scoped Club code.,No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/club/{clubId},Scope fields,teamId,scope.teamId,Team UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/eligibility/club/{clubId},Scope fields,teamName,scope.teamName,Team display name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/club/{clubId},Scope fields,regionId,scope.regionId,Region UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/eligibility/club/{clubId},Scope fields,regionName,scope.regionName,Region display name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/club/{clubId},Scope fields,regionCode,scope.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/club/{clubId},Role Evaluation fields,role,data[].roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/club/{clubId},Role Evaluation fields,tier,data[].roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/club/{clubId},Role Evaluation fields,eligible,data[].roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/club/{clubId},Role Evaluation fields,conditions,data[].roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/eligibility/club/{clubId},Eligibility Condition fields,condition,data[].roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/club/{clubId},Eligibility Condition fields,passed,data[].roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/club/{clubId},Eligibility Condition fields,details,data[].roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,N/A
-GET /api/v1/eligibility/team/{teamId},Response fields,scope,scope,Descriptor for the requested eligibility scope.,Yes,Object,N/A,No,N/A
-GET /api/v1/eligibility/team/{teamId},Response fields,windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/team/{teamId},Response fields,windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/team/{teamId},Member Result fields,memberId,data[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/team/{teamId},Member Result fields,memberFound,data[].memberFound,Whether the requested USAV member was found.,No,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/team/{teamId},Member Result fields,firstName,data[].firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/team/{teamId},Member Result fields,lastName,data[].lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/team/{teamId},Member Result fields,birthDate,data[].birthDate,Member date of birth.,No,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/eligibility/team/{teamId},Member Result fields,gender,data[].gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female"
-GET /api/v1/eligibility/team/{teamId},Member Result fields,graduationYear,data[].graduationYear,High-school graduation year.,No,Integer,N/A,Yes,N/A
-GET /api/v1/eligibility/team/{teamId},Member Result fields,windowStart,data[].windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/team/{teamId},Member Result fields,windowEnd,data[].windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/team/{teamId},Member Result fields,roles,data[].roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/eligibility/team/{teamId},Scope fields,type,scope.type,Type of eligibility scope requested.,Yes,String,Maximum 6 characters,No,"club, team, region"
-GET /api/v1/eligibility/team/{teamId},Scope fields,clubId,scope.clubId,Club UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/eligibility/team/{teamId},Scope fields,clubName,scope.clubName,Club display name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/team/{teamId},Scope fields,clubCode,scope.clubCode,Club Code component used in Team Code or the scoped Club code.,No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/team/{teamId},Scope fields,teamId,scope.teamId,Team UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/eligibility/team/{teamId},Scope fields,teamName,scope.teamName,Team display name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/team/{teamId},Scope fields,regionId,scope.regionId,Region UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/eligibility/team/{teamId},Scope fields,regionName,scope.regionName,Region display name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/team/{teamId},Scope fields,regionCode,scope.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/team/{teamId},Role Evaluation fields,role,data[].roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/team/{teamId},Role Evaluation fields,tier,data[].roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/team/{teamId},Role Evaluation fields,eligible,data[].roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/team/{teamId},Role Evaluation fields,conditions,data[].roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/eligibility/team/{teamId},Eligibility Condition fields,condition,data[].roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/team/{teamId},Eligibility Condition fields,passed,data[].roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/team/{teamId},Eligibility Condition fields,details,data[].roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,N/A
-GET /api/v1/eligibility/region/{regionId},Response fields,scope,scope,Descriptor for the requested eligibility scope.,Yes,Object,N/A,No,N/A
-GET /api/v1/eligibility/region/{regionId},Response fields,windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/region/{regionId},Response fields,windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/region/{regionId},Member Result fields,memberId,data[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/region/{regionId},Member Result fields,memberFound,data[].memberFound,Whether the requested USAV member was found.,No,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/region/{regionId},Member Result fields,firstName,data[].firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/region/{regionId},Member Result fields,lastName,data[].lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/region/{regionId},Member Result fields,birthDate,data[].birthDate,Member date of birth.,No,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/eligibility/region/{regionId},Member Result fields,gender,data[].gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female"
-GET /api/v1/eligibility/region/{regionId},Member Result fields,graduationYear,data[].graduationYear,High-school graduation year.,No,Integer,N/A,Yes,N/A
-GET /api/v1/eligibility/region/{regionId},Member Result fields,windowStart,data[].windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/region/{regionId},Member Result fields,windowEnd,data[].windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/region/{regionId},Member Result fields,roles,data[].roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/eligibility/region/{regionId},Scope fields,type,scope.type,Type of eligibility scope requested.,Yes,String,Maximum 6 characters,No,"club, team, region"
-GET /api/v1/eligibility/region/{regionId},Scope fields,clubId,scope.clubId,Club UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/eligibility/region/{regionId},Scope fields,clubName,scope.clubName,Club display name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/region/{regionId},Scope fields,clubCode,scope.clubCode,Club Code component used in Team Code or the scoped Club code.,No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/region/{regionId},Scope fields,teamId,scope.teamId,Team UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/eligibility/region/{regionId},Scope fields,teamName,scope.teamName,Team display name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/region/{regionId},Scope fields,regionId,scope.regionId,Region UUID.,No,String (UUID),36 characters,No,UUID
-GET /api/v1/eligibility/region/{regionId},Scope fields,regionName,scope.regionName,Region display name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/region/{regionId},Scope fields,regionCode,scope.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",No,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/region/{regionId},Role Evaluation fields,role,data[].roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/region/{regionId},Role Evaluation fields,tier,data[].roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/region/{regionId},Role Evaluation fields,eligible,data[].roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/region/{regionId},Role Evaluation fields,conditions,data[].roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/eligibility/region/{regionId},Eligibility Condition fields,condition,data[].roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/region/{regionId},Eligibility Condition fields,passed,data[].roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/region/{regionId},Eligibility Condition fields,details,data[].roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,N/A
-GET /api/v1/eligibility/{memberId},Member fields,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/{memberId},Member fields,memberFound,memberFound,Whether the requested USAV member was found.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/{memberId},Member fields,firstName,firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/{memberId},Member fields,lastName,lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/{memberId},Member fields,birthDate,birthDate,Member date of birth.,No,String (date),10 characters,Yes,YYYY-MM-DD
-GET /api/v1/eligibility/{memberId},Member fields,gender,gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female"
-GET /api/v1/eligibility/{memberId},Member fields,graduationYear,graduationYear,High-school graduation year.,No,Integer,N/A,Yes,N/A
-GET /api/v1/eligibility/{memberId},Member fields,windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/{memberId},Member fields,windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,YYYY-MM-DD
-GET /api/v1/eligibility/{memberId},Member fields,roles,roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/eligibility/{memberId},Role Evaluation fields,role,roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/{memberId},Role Evaluation fields,tier,roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,Not specified
-GET /api/v1/eligibility/{memberId},Role Evaluation fields,eligible,roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/{memberId},Role Evaluation fields,conditions,roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,N/A
-GET /api/v1/eligibility/{memberId},Eligibility Condition fields,condition,roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,Not specified
-GET /api/v1/eligibility/{memberId},Eligibility Condition fields,passed,roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,N/A
-GET /api/v1/eligibility/{memberId},Eligibility Condition fields,details,roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,N/A
+Endpoint,Field,Qualified name,Definition,Required,Data type,Length,Nullable,Allowed values,Format
+GET /api/v1/clubs,id,id,Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/clubs,name,name,Club name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/clubs,code,code,Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,regionId,regionId,Region UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/clubs,region,region,Related Region details.,Yes,Object,N/A,No,,
+GET /api/v1/clubs,affiliationStatus,affiliationStatus,Current Club affiliation status.,Yes,String,Maximum 11 characters,No,"Active, Inactive, InProgress, Archived, Unpaid, Pending, NotApproved",
+GET /api/v1/clubs,affiliationStatusUpdatedAt,affiliationStatusUpdatedAt,Date and time the Club affiliation status last changed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/clubs,type,type,Type or category of the club.,Yes,Array of strings,Each value: maximum 7 characters,No,"Indoor, Outdoor",
+GET /api/v1/clubs,gender,gender,Gender value returned for the record.,Yes,Array of strings,Each value: maximum 6 characters,No,"Male, Female",
+GET /api/v1/clubs,address,address,Address returned for the record.,Yes,Object,N/A,Yes,,
+GET /api/v1/clubs,contact,contact,Primary Club contact details.,Yes,Object,N/A,Yes,,
+GET /api/v1/clubs,location,location,Primary Club facility details.,Yes,Object,N/A,Yes,,
+GET /api/v1/clubs,logoUrl,logoUrl,URL of the Club logo image.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/clubs,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/clubs,metadata,metadata,Additional metadata returned with the record.,Yes,Object,N/A,No,,
+GET /api/v1/clubs,id,region.id,Region UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/clubs,name,region.name,Region name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/clubs,code,region.code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,id,address.id,Address UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/clubs,name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/clubs,street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,name,contact.name,Contact name.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,email,contact.email,Email address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,phone,contact.phone,Telephone number.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,role,contact.role,Contact person's role or title.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,name,location.name,Location name.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,address,location.address,Address returned for the record.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,addressExtra,location.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,city,location.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,state,location.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs,zipCode,location.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},id,id,Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/clubs/{id},name,name,Club name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/clubs/{id},code,code,Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},regionId,regionId,Region UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/clubs/{id},region,region,Related Region details.,Yes,Object,N/A,No,,
+GET /api/v1/clubs/{id},affiliationStatus,affiliationStatus,Current Club affiliation status.,Yes,String,Maximum 11 characters,No,"Active, Inactive, InProgress, Archived, Unpaid, Pending, NotApproved",
+GET /api/v1/clubs/{id},affiliationStatusUpdatedAt,affiliationStatusUpdatedAt,Date and time the Club affiliation status last changed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/clubs/{id},type,type,Type or category of the club.,Yes,Array of strings,Each value: maximum 7 characters,No,"Indoor, Outdoor",
+GET /api/v1/clubs/{id},gender,gender,Gender value returned for the record.,Yes,Array of strings,Each value: maximum 6 characters,No,"Male, Female",
+GET /api/v1/clubs/{id},address,address,Address returned for the record.,Yes,Object,N/A,Yes,,
+GET /api/v1/clubs/{id},contact,contact,Primary Club contact details.,Yes,Object,N/A,Yes,,
+GET /api/v1/clubs/{id},location,location,Primary Club facility details.,Yes,Object,N/A,Yes,,
+GET /api/v1/clubs/{id},logoUrl,logoUrl,URL of the Club logo image.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/clubs/{id},updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/clubs/{id},metadata,metadata,Additional metadata returned with the record.,Yes,Object,N/A,No,,
+GET /api/v1/clubs/{id},id,region.id,Region UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/clubs/{id},name,region.name,Region name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/clubs/{id},code,region.code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},id,address.id,Address UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/clubs/{id},name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/clubs/{id},street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},name,contact.name,Contact name.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},email,contact.email,Email address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},phone,contact.phone,Telephone number.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},role,contact.role,Contact person's role or title.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},name,location.name,Location name.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},address,location.address,Address returned for the record.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},addressExtra,location.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},city,location.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},state,location.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/clubs/{id},zipCode,location.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/regions,id,id,Region UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/regions,name,name,Region name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/regions,code,code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,id,id,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles,firstName,firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles,lastName,lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles,middleName,middleName,Member middle name.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,birthDate,birthDate,Member date of birth.,Yes,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/profiles,gender,gender,Member birth gender used for division and eligibility evaluation.,Yes,String,Maximum 6 characters,Yes,"Male, Female",
+GET /api/v1/profiles,genderIdentity,genderIdentity,Preferred display gender identity.,Yes,String,Maximum 10 characters,Yes,"Male, Female, Non-binary",
+GET /api/v1/profiles,phoneNumber,phoneNumber,Primary contact telephone number for the Profile.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,contactEmail,contactEmail,Primary contact email for the Profile.,Yes,String,No maximum defined,Yes,,
+GET /api/v1/profiles,status,status,Current status of the profile.,Yes,String,Maximum 8 characters,No,"active, inactive",
+GET /api/v1/profiles,address,address,Address returned for the record.,Yes,Object,N/A,Yes,,
+GET /api/v1/profiles,guardians,guardians,Guardian relationships associated with the Profile.,Yes,Array of objects,N/A,No,,
+GET /api/v1/profiles,suspensions,suspensions,Suspensions associated with the Profile.,Yes,Array of objects,N/A,No,,
+GET /api/v1/profiles,demographics,demographics,Demographic information associated with the Profile.,Yes,Object,N/A,No,,
+GET /api/v1/profiles,preferences,preferences,Preferences and consent values associated with the Profile.,Yes,Object,N/A,No,,
+GET /api/v1/profiles,education,education,Education information associated with the Profile.,Yes,Object,N/A,No,,
+GET /api/v1/profiles,avatarUrl,avatarUrl,URL of the Profile avatar image.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles,id,address.id,Address UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles,name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles,street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,userId,guardians[].userId,Related user UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles,email,guardians[].email,Email address.,Yes,String,No maximum defined,Yes,,
+GET /api/v1/profiles,isMainGuardian,guardians[].isMainGuardian,Whether this guardian is the primary guardian.,Yes,Boolean,N/A,No,,
+GET /api/v1/profiles,id,suspensions[].id,Suspension UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles,profileId,suspensions[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles,memberId,suspensions[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles,scope,suspensions[].scope,Descriptor for the requested eligibility scope.,Yes,String,Maximum 13 characters,No,"global, role-specific",
+GET /api/v1/profiles,affectedRoles,suspensions[].affectedRoles,Role codes affected by the suspension; empty or null indicates a global suspension.,Yes,Array of strings,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,reason,suspensions[].reason,Reason recorded for the suspension.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles,startDate,suspensions[].startDate,Start date or start timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles,endDate,suspensions[].endDate,End date or end timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/profiles,canceledAt,suspensions[].canceledAt,Date and time the suspension was canceled or lifted.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/profiles,createdAt,suspensions[].createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles,updatedAt,suspensions[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles,ethnicity,demographics.ethnicity,Ethnicity value recorded for the Profile.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles,disability,demographics.disability,Whether the Profile records a disability indicator.,Yes,Boolean,N/A,Yes,,
+GET /api/v1/profiles,militaryService,demographics.militaryService,Whether the Profile records military service.,Yes,Boolean,N/A,Yes,,
+GET /api/v1/profiles,ncsaShareAgreed,preferences.ncsaShareAgreed,Whether the member agreed to NCSA data sharing.,Yes,Boolean,N/A,Yes,,
+GET /api/v1/profiles,ncsaShareAgreedAt,preferences.ncsaShareAgreedAt,Date and time the NCSA sharing choice was recorded.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/profiles,graduationYear,education.graduationYear,High-school graduation year.,Yes,Integer,N/A,Yes,,
+GET /api/v1/profiles/{id},id,id,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles/{id},memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles/{id},firstName,firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles/{id},lastName,lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles/{id},middleName,middleName,Member middle name.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},birthDate,birthDate,Member date of birth.,Yes,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/profiles/{id},gender,gender,Member birth gender used for division and eligibility evaluation.,Yes,String,Maximum 6 characters,Yes,"Male, Female",
+GET /api/v1/profiles/{id},genderIdentity,genderIdentity,Preferred display gender identity.,Yes,String,Maximum 10 characters,Yes,"Male, Female, Non-binary",
+GET /api/v1/profiles/{id},phoneNumber,phoneNumber,Primary contact telephone number for the Profile.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},contactEmail,contactEmail,Primary contact email for the Profile.,Yes,String,No maximum defined,Yes,,
+GET /api/v1/profiles/{id},status,status,Current status of the profile.,Yes,String,Maximum 8 characters,No,"active, inactive",
+GET /api/v1/profiles/{id},address,address,Address returned for the record.,Yes,Object,N/A,Yes,,
+GET /api/v1/profiles/{id},guardians,guardians,Guardian relationships associated with the Profile.,Yes,Array of objects,N/A,No,,
+GET /api/v1/profiles/{id},suspensions,suspensions,Suspensions associated with the Profile.,Yes,Array of objects,N/A,No,,
+GET /api/v1/profiles/{id},demographics,demographics,Demographic information associated with the Profile.,Yes,Object,N/A,No,,
+GET /api/v1/profiles/{id},preferences,preferences,Preferences and consent values associated with the Profile.,Yes,Object,N/A,No,,
+GET /api/v1/profiles/{id},education,education,Education information associated with the Profile.,Yes,Object,N/A,No,,
+GET /api/v1/profiles/{id},avatarUrl,avatarUrl,URL of the Profile avatar image.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles/{id},updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles/{id},id,address.id,Address UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles/{id},name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles/{id},street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},userId,guardians[].userId,Related user UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles/{id},email,guardians[].email,Email address.,Yes,String,No maximum defined,Yes,,
+GET /api/v1/profiles/{id},isMainGuardian,guardians[].isMainGuardian,Whether this guardian is the primary guardian.,Yes,Boolean,N/A,No,,
+GET /api/v1/profiles/{id},id,suspensions[].id,Suspension UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles/{id},profileId,suspensions[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/profiles/{id},memberId,suspensions[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles/{id},scope,suspensions[].scope,Descriptor for the requested eligibility scope.,Yes,String,Maximum 13 characters,No,"global, role-specific",
+GET /api/v1/profiles/{id},affectedRoles,suspensions[].affectedRoles,Role codes affected by the suspension; empty or null indicates a global suspension.,Yes,Array of strings,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},reason,suspensions[].reason,Reason recorded for the suspension.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/profiles/{id},startDate,suspensions[].startDate,Start date or start timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles/{id},endDate,suspensions[].endDate,End date or end timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/profiles/{id},canceledAt,suspensions[].canceledAt,Date and time the suspension was canceled or lifted.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/profiles/{id},createdAt,suspensions[].createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles/{id},updatedAt,suspensions[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/profiles/{id},ethnicity,demographics.ethnicity,Ethnicity value recorded for the Profile.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/profiles/{id},disability,demographics.disability,Whether the Profile records a disability indicator.,Yes,Boolean,N/A,Yes,,
+GET /api/v1/profiles/{id},militaryService,demographics.militaryService,Whether the Profile records military service.,Yes,Boolean,N/A,Yes,,
+GET /api/v1/profiles/{id},ncsaShareAgreed,preferences.ncsaShareAgreed,Whether the member agreed to NCSA data sharing.,Yes,Boolean,N/A,Yes,,
+GET /api/v1/profiles/{id},ncsaShareAgreedAt,preferences.ncsaShareAgreedAt,Date and time the NCSA sharing choice was recorded.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/profiles/{id},graduationYear,education.graduationYear,High-school graduation year.,Yes,Integer,N/A,Yes,,
+GET /api/v1/teams,id,id,Team UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams,name,name,Team name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams,clubId,clubId,Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams,club,club,Related Club details.,No,Object,N/A,No,,
+GET /api/v1/teams,ageDefinition,ageDefinition,Junior age division assigned to the Team; may be null for adult Teams.,Yes,String,Maximum 3 characters,Yes,"8U, 9U, 10U, 11U, 12U, 13U, 14U, 15U, 16U, 17U, 18U",
+GET /api/v1/teams,gender,gender,Gender value returned for the record.,Yes,String,Maximum 6 characters,No,"Male, Female, Co-Ed",
+GET /api/v1/teams,division,division,Display label derived from the Team classification.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/teams,type,type,Type or category of the team.,Yes,String,Maximum 6 characters,Yes,"Indoor, Beach, Grass",
+GET /api/v1/teams,status,status,Current status of the team.,Yes,String,Maximum 8 characters,No,"active, inactive",
+GET /api/v1/teams,teamCode,teamCode,Standardized operational Team Code generated from the Team Code components.,Yes,String,13 or 14 characters,Yes,,genderCode + ageGroup + playLevel + clubCode + teamRank + regionCode; unique across USAV; Team UUID remains authoritative
+GET /api/v1/teams,genderCode,genderCode,One-character gender component used in Team Code.,Yes,String,1 character,Yes,"M, F, C",
+GET /api/v1/teams,ageGroup,ageGroup,Team classification used in Team Code: Junior or Adult.,Yes,String,1 character,Yes,"J, A",
+GET /api/v1/teams,playLevel,playLevel,Two-character junior age or adult play-level component used in Team Code.,Yes,String,2 characters,Yes,,Two uppercase letters or digits; approved play-level values are not fully specified
+GET /api/v1/teams,clubCode,clubCode,Club Code component used in Team Code or the scoped Club code.,Yes,String,5 characters,Yes,,Five uppercase letters or digits; unique within Region
+GET /api/v1/teams,teamRank,teamRank,Two-digit Team rank component used in Team Code.,Yes,String,2 characters,Yes,,"Two digits, zero-padded (for example, 01)"
+GET /api/v1/teams,regionCode,regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",Yes,String,2 to 3 characters,Yes,,Two-character USAV Region Code or three-character foreign code
+GET /api/v1/teams,teamCodeComponents,teamCodeComponents,Individual values used to construct Team Code.,Yes,Object,N/A,No,,
+GET /api/v1/teams,members,members,Team roster returned when member expansion is requested.,No,Array of objects,N/A,No,,
+GET /api/v1/teams,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/teams,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/teams,id,club.id,Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams,name,club.name,Club name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams,code,club.code,Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/teams,genderCode,teamCodeComponents.genderCode,One-character gender component used in Team Code.,Yes,String,1 character,Yes,"M, F, C",
+GET /api/v1/teams,ageGroup,teamCodeComponents.ageGroup,Team classification used in Team Code: Junior or Adult.,Yes,String,1 character,Yes,"J, A",
+GET /api/v1/teams,playLevel,teamCodeComponents.playLevel,Two-character junior age or adult play-level component used in Team Code.,Yes,String,2 characters,Yes,,Two uppercase letters or digits; approved play-level values are not fully specified
+GET /api/v1/teams,clubCode,teamCodeComponents.clubCode,Club Code component used in Team Code or the scoped Club code.,Yes,String,5 characters,Yes,,Five uppercase letters or digits; unique within Region
+GET /api/v1/teams,teamRank,teamCodeComponents.teamRank,Two-digit Team rank component used in Team Code.,Yes,String,2 characters,Yes,,"Two digits, zero-padded (for example, 01)"
+GET /api/v1/teams,regionCode,teamCodeComponents.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",Yes,String,2 to 3 characters,Yes,,Two-character USAV Region Code or three-character foreign code
+GET /api/v1/teams,profileId,members[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams,profile,members[].profile,Related member Profile details.,Yes,Object,N/A,No,,
+GET /api/v1/teams,role,members[].role,Member role on the Team.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/teams,joinedAt,members[].joinedAt,Date and time the member joined the Team.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/teams,id,members[].profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams,memberId,members[].profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams,firstName,members[].profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams,lastName,members[].profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams,birthDate,members[].profile.birthDate,Member date of birth.,Yes,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/teams,gender,members[].profile.gender,Member birth gender used for division and eligibility evaluation.,Yes,String,Maximum 6 characters,Yes,"Male, Female",
+GET /api/v1/teams/{id},id,id,Team UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams/{id},name,name,Team name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams/{id},clubId,clubId,Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams/{id},club,club,Related Club details.,No,Object,N/A,No,,
+GET /api/v1/teams/{id},ageDefinition,ageDefinition,Junior age division assigned to the Team; may be null for adult Teams.,Yes,String,Maximum 3 characters,Yes,"8U, 9U, 10U, 11U, 12U, 13U, 14U, 15U, 16U, 17U, 18U",
+GET /api/v1/teams/{id},gender,gender,Gender value returned for the record.,Yes,String,Maximum 6 characters,No,"Male, Female, Co-Ed",
+GET /api/v1/teams/{id},division,division,Display label derived from the Team classification.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/teams/{id},type,type,Type or category of the team.,Yes,String,Maximum 6 characters,Yes,"Indoor, Beach, Grass",
+GET /api/v1/teams/{id},status,status,Current status of the team.,Yes,String,Maximum 8 characters,No,"active, inactive",
+GET /api/v1/teams/{id},teamCode,teamCode,Standardized operational Team Code generated from the Team Code components.,Yes,String,13 or 14 characters,Yes,,genderCode + ageGroup + playLevel + clubCode + teamRank + regionCode; unique across USAV; Team UUID remains authoritative
+GET /api/v1/teams/{id},genderCode,genderCode,One-character gender component used in Team Code.,Yes,String,1 character,Yes,"M, F, C",
+GET /api/v1/teams/{id},ageGroup,ageGroup,Team classification used in Team Code: Junior or Adult.,Yes,String,1 character,Yes,"J, A",
+GET /api/v1/teams/{id},playLevel,playLevel,Two-character junior age or adult play-level component used in Team Code.,Yes,String,2 characters,Yes,,Two uppercase letters or digits; approved play-level values are not fully specified
+GET /api/v1/teams/{id},clubCode,clubCode,Club Code component used in Team Code or the scoped Club code.,Yes,String,5 characters,Yes,,Five uppercase letters or digits; unique within Region
+GET /api/v1/teams/{id},teamRank,teamRank,Two-digit Team rank component used in Team Code.,Yes,String,2 characters,Yes,,"Two digits, zero-padded (for example, 01)"
+GET /api/v1/teams/{id},regionCode,regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",Yes,String,2 to 3 characters,Yes,,Two-character USAV Region Code or three-character foreign code
+GET /api/v1/teams/{id},teamCodeComponents,teamCodeComponents,Individual values used to construct Team Code.,Yes,Object,N/A,No,,
+GET /api/v1/teams/{id},members,members,Team roster returned when member expansion is requested.,No,Array of objects,N/A,No,,
+GET /api/v1/teams/{id},createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/teams/{id},updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/teams/{id},id,club.id,Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams/{id},name,club.name,Club name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams/{id},code,club.code,Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/teams/{id},genderCode,teamCodeComponents.genderCode,One-character gender component used in Team Code.,Yes,String,1 character,Yes,"M, F, C",
+GET /api/v1/teams/{id},ageGroup,teamCodeComponents.ageGroup,Team classification used in Team Code: Junior or Adult.,Yes,String,1 character,Yes,"J, A",
+GET /api/v1/teams/{id},playLevel,teamCodeComponents.playLevel,Two-character junior age or adult play-level component used in Team Code.,Yes,String,2 characters,Yes,,Two uppercase letters or digits; approved play-level values are not fully specified
+GET /api/v1/teams/{id},clubCode,teamCodeComponents.clubCode,Club Code component used in Team Code or the scoped Club code.,Yes,String,5 characters,Yes,,Five uppercase letters or digits; unique within Region
+GET /api/v1/teams/{id},teamRank,teamCodeComponents.teamRank,Two-digit Team rank component used in Team Code.,Yes,String,2 characters,Yes,,"Two digits, zero-padded (for example, 01)"
+GET /api/v1/teams/{id},regionCode,teamCodeComponents.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",Yes,String,2 to 3 characters,Yes,,Two-character USAV Region Code or three-character foreign code
+GET /api/v1/teams/{id},profileId,members[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams/{id},profile,members[].profile,Related member Profile details.,Yes,Object,N/A,No,,
+GET /api/v1/teams/{id},role,members[].role,Member role on the Team.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/teams/{id},joinedAt,members[].joinedAt,Date and time the member joined the Team.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/teams/{id},id,members[].profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/teams/{id},memberId,members[].profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams/{id},firstName,members[].profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams/{id},lastName,members[].profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/teams/{id},birthDate,members[].profile.birthDate,Member date of birth.,Yes,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/teams/{id},gender,members[].profile.gender,Member birth gender used for division and eligibility evaluation.,Yes,String,Maximum 6 characters,Yes,"Male, Female",
+GET /api/v1/memberships,id,id,Membership UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,profile,profile,Related member Profile details.,Yes,Object,N/A,No,,
+GET /api/v1/memberships,userId,userId,Related user UUID.,Yes,String (UUID),36 characters,Yes,,UUID
+GET /api/v1/memberships,regionId,regionId,Region UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,region,region,Related Region details.,Yes,Object,N/A,No,,
+GET /api/v1/memberships,status,status,Current status of the membership.,Yes,String,Maximum 9 characters,No,"Paid, Unpaid, Canceled, Suspended, Expired",
+GET /api/v1/memberships,startDate,startDate,Start date or start timestamp for the record.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/memberships,endDate,endDate,End date or end timestamp for the record.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/memberships,roles,roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,,
+GET /api/v1/memberships,address,address,Address returned for the record.,Yes,Object,N/A,Yes,,
+GET /api/v1/memberships,payment,payment,Payment details associated with the membership.,Yes,Object,N/A,Yes,,
+GET /api/v1/memberships,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships,id,profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,memberId,profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,firstName,profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,lastName,profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,id,region.id,Region UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,name,region.name,Region name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,code,region.code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships,id,roles[].id,Membership Role UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,membershipRoleId,roles[].membershipRoleId,Role definition UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,role,roles[].role,Role code evaluated for eligibility.,Yes,Object,N/A,No,,
+GET /api/v1/memberships,tierId,roles[].tierId,Membership tier UUID.,Yes,String (UUID),36 characters,Yes,,UUID
+GET /api/v1/memberships,tier,roles[].tier,Membership tier details.,Yes,Object,N/A,Yes,,
+GET /api/v1/memberships,status,roles[].status,Current status of the membership role.,Yes,String,Maximum 8 characters,No,"Active, Removed, Unpaid, Upgraded",
+GET /api/v1/memberships,clubAssignment,roles[].clubAssignment,Club assignment associated with the membership role.,Yes,Object,N/A,Yes,,
+GET /api/v1/memberships,eligibility,roles[].eligibility,Eligibility summary stored with the membership role.,Yes,Object,N/A,No,,
+GET /api/v1/memberships,credentials,roles[].credentials,Credential requirements associated with the membership role.,Yes,Array of objects,N/A,No,,
+GET /api/v1/memberships,waivers,roles[].waivers,Waivers associated with the membership role.,Yes,Array of objects,N/A,No,,
+GET /api/v1/memberships,updatedAt,roles[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships,id,roles[].role.id,Role UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,name,roles[].role.name,Role name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,id,roles[].tier.id,Tier UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,name,roles[].tier.name,Tier name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,length,roles[].tier.length,Human-readable membership tier duration.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships,category,roles[].tier.category,Membership tier category.,Yes,String,Maximum 7 characters,Yes,"Full, Limited",
+GET /api/v1/memberships,windowType,roles[].tier.windowType,Method used to determine the membership tier validity window.,Yes,String,Maximum 10 characters,Yes,"FullSeason, Days, DateRange",
+GET /api/v1/memberships,durationDays,roles[].tier.durationDays,Number of days in a fixed-duration membership tier.,Yes,Integer,N/A,Yes,,
+GET /api/v1/memberships,windowStart,roles[].tier.windowStart,Start date of an explicit membership tier validity window.,Yes,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/memberships,windowEnd,roles[].tier.windowEnd,End date of an explicit membership tier validity window.,Yes,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/memberships,restrictions,roles[].tier.restrictions,Restrictions associated with the membership tier.,Yes,Object,N/A,No,,
+GET /api/v1/memberships,maxRoles,roles[].tier.restrictions.maxRoles,Maximum number of roles allowed by the membership tier.,Yes,Integer,N/A,Yes,,
+GET /api/v1/memberships,allowedTypes,roles[].tier.restrictions.allowedTypes,Volleyball types allowed by the membership tier.,Yes,Array of strings,Each value: maximum 7 characters,No,"Indoor, Outdoor",
+GET /api/v1/memberships,clubId,roles[].clubAssignment.clubId,Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,club,roles[].clubAssignment.club,Related Club details.,Yes,Object,N/A,No,,
+GET /api/v1/memberships,status,roles[].clubAssignment.status,Current status of the club assignment.,Yes,String,Maximum 11 characters,No,"APPROVED, REJECTED, IN_TRANSFER",
+GET /api/v1/memberships,assignedAt,roles[].clubAssignment.assignedAt,Date and time the Club assignment was made.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships,id,roles[].clubAssignment.club.id,Assigned Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,name,roles[].clubAssignment.club.name,Assigned Club name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,code,roles[].clubAssignment.club.code,Assigned Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships,isEligible,roles[].eligibility.isEligible,Stored eligibility indicator for the membership role.,Yes,Boolean,N/A,No,,
+GET /api/v1/memberships,reasons,roles[].eligibility.reasons,Reasons supporting the stored eligibility result.,Yes,Array of strings,No maximum defined,No,,
+GET /api/v1/memberships,id,roles[].credentials[].id,Role Credential UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,profileId,roles[].credentials[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,memberId,roles[].credentials[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,credentialId,roles[].credentials[].credentialId,Credential definition UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,credential,roles[].credentials[].credential,Credential definition associated with the credential assignment.,Yes,Object,N/A,No,,
+GET /api/v1/memberships,status,roles[].credentials[].status,Current status of the role credential.,Yes,String,Maximum 10 characters,No,"Completed, InProgress, NotStarted, Cancelled, Submitted, Failed",
+GET /api/v1/memberships,requiredFrom,roles[].credentials[].requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships,completedAt,roles[].credentials[].completedAt,Date and time the credential or transfer was completed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships,validUntil,roles[].credentials[].validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC; expiration-boundary meaning remains unresolved
+GET /api/v1/memberships,updatedAt,roles[].credentials[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships,id,roles[].credentials[].credential.id,Credential definition UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,name,roles[].credentials[].credential.name,Credential definition name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,type,roles[].credentials[].credential.type,Type or category of the credential definition.,Yes,String,Maximum 9 characters,Yes,"SAFESPORT, LITMOS, NCSI",
+GET /api/v1/memberships,id,roles[].waivers[].id,Role Waiver UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,profileId,roles[].waivers[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,memberId,roles[].waivers[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,type,roles[].waivers[].type,Type or category of the role waiver.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,status,roles[].waivers[].status,Current status of the role waiver.,Yes,String,Maximum 9 characters,No,Published,
+GET /api/v1/memberships,requiredFrom,roles[].waivers[].requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships,signedAt,roles[].waivers[].signedAt,Date and time the member signed the waiver.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships,validUntil,roles[].waivers[].validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC; expiration-boundary meaning remains unresolved
+GET /api/v1/memberships,version,roles[].waivers[].version,Waiver version.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships,updatedAt,roles[].waivers[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships,id,address.id,Address UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships,name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships,addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships,city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships,state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships,zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships,amount,payment.amount,Payment amount.,Yes,Number,N/A,No,,
+GET /api/v1/memberships,currency,payment.currency,Currency used for the payment.,Yes,String,3 characters,No,,
+GET /api/v1/memberships,method,payment.method,Payment method.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships,transactionId,payment.transactionId,Payment processor transaction identifier.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},id,id,Membership UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},profile,profile,Related member Profile details.,Yes,Object,N/A,No,,
+GET /api/v1/memberships/{id},userId,userId,Related user UUID.,Yes,String (UUID),36 characters,Yes,,UUID
+GET /api/v1/memberships/{id},regionId,regionId,Region UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},region,region,Related Region details.,Yes,Object,N/A,No,,
+GET /api/v1/memberships/{id},status,status,Current status of the membership.,Yes,String,Maximum 9 characters,No,"Paid, Unpaid, Canceled, Suspended, Expired",
+GET /api/v1/memberships/{id},startDate,startDate,Start date or start timestamp for the record.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/memberships/{id},endDate,endDate,End date or end timestamp for the record.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/memberships/{id},roles,roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,,
+GET /api/v1/memberships/{id},address,address,Address returned for the record.,Yes,Object,N/A,Yes,,
+GET /api/v1/memberships/{id},payment,payment,Payment details associated with the membership.,Yes,Object,N/A,Yes,,
+GET /api/v1/memberships/{id},createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships/{id},updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships/{id},id,profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},memberId,profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},firstName,profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},lastName,profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},id,region.id,Region UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},name,region.name,Region name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},code,region.code,Region short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},id,roles[].id,Membership Role UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},membershipRoleId,roles[].membershipRoleId,Role definition UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},role,roles[].role,Role code evaluated for eligibility.,Yes,Object,N/A,No,,
+GET /api/v1/memberships/{id},tierId,roles[].tierId,Membership tier UUID.,Yes,String (UUID),36 characters,Yes,,UUID
+GET /api/v1/memberships/{id},tier,roles[].tier,Membership tier details.,Yes,Object,N/A,Yes,,
+GET /api/v1/memberships/{id},status,roles[].status,Current status of the membership role.,Yes,String,Maximum 8 characters,No,"Active, Removed, Unpaid, Upgraded",
+GET /api/v1/memberships/{id},clubAssignment,roles[].clubAssignment,Club assignment associated with the membership role.,Yes,Object,N/A,Yes,,
+GET /api/v1/memberships/{id},eligibility,roles[].eligibility,Eligibility summary stored with the membership role.,Yes,Object,N/A,No,,
+GET /api/v1/memberships/{id},credentials,roles[].credentials,Credential requirements associated with the membership role.,Yes,Array of objects,N/A,No,,
+GET /api/v1/memberships/{id},waivers,roles[].waivers,Waivers associated with the membership role.,Yes,Array of objects,N/A,No,,
+GET /api/v1/memberships/{id},updatedAt,roles[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships/{id},id,roles[].role.id,Role UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},name,roles[].role.name,Role name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},id,roles[].tier.id,Tier UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},name,roles[].tier.name,Tier name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},length,roles[].tier.length,Human-readable membership tier duration.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},category,roles[].tier.category,Membership tier category.,Yes,String,Maximum 7 characters,Yes,"Full, Limited",
+GET /api/v1/memberships/{id},windowType,roles[].tier.windowType,Method used to determine the membership tier validity window.,Yes,String,Maximum 10 characters,Yes,"FullSeason, Days, DateRange",
+GET /api/v1/memberships/{id},durationDays,roles[].tier.durationDays,Number of days in a fixed-duration membership tier.,Yes,Integer,N/A,Yes,,
+GET /api/v1/memberships/{id},windowStart,roles[].tier.windowStart,Start date of an explicit membership tier validity window.,Yes,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/memberships/{id},windowEnd,roles[].tier.windowEnd,End date of an explicit membership tier validity window.,Yes,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/memberships/{id},restrictions,roles[].tier.restrictions,Restrictions associated with the membership tier.,Yes,Object,N/A,No,,
+GET /api/v1/memberships/{id},maxRoles,roles[].tier.restrictions.maxRoles,Maximum number of roles allowed by the membership tier.,Yes,Integer,N/A,Yes,,
+GET /api/v1/memberships/{id},allowedTypes,roles[].tier.restrictions.allowedTypes,Volleyball types allowed by the membership tier.,Yes,Array of strings,Each value: maximum 7 characters,No,"Indoor, Outdoor",
+GET /api/v1/memberships/{id},clubId,roles[].clubAssignment.clubId,Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},club,roles[].clubAssignment.club,Related Club details.,Yes,Object,N/A,No,,
+GET /api/v1/memberships/{id},status,roles[].clubAssignment.status,Current status of the club assignment.,Yes,String,Maximum 11 characters,No,"APPROVED, REJECTED, IN_TRANSFER",
+GET /api/v1/memberships/{id},assignedAt,roles[].clubAssignment.assignedAt,Date and time the Club assignment was made.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships/{id},id,roles[].clubAssignment.club.id,Assigned Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},name,roles[].clubAssignment.club.name,Assigned Club name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},code,roles[].clubAssignment.club.code,Assigned Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},isEligible,roles[].eligibility.isEligible,Stored eligibility indicator for the membership role.,Yes,Boolean,N/A,No,,
+GET /api/v1/memberships/{id},reasons,roles[].eligibility.reasons,Reasons supporting the stored eligibility result.,Yes,Array of strings,No maximum defined,No,,
+GET /api/v1/memberships/{id},id,roles[].credentials[].id,Role Credential UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},profileId,roles[].credentials[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},memberId,roles[].credentials[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},credentialId,roles[].credentials[].credentialId,Credential definition UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},credential,roles[].credentials[].credential,Credential definition associated with the credential assignment.,Yes,Object,N/A,No,,
+GET /api/v1/memberships/{id},status,roles[].credentials[].status,Current status of the role credential.,Yes,String,Maximum 10 characters,No,"Completed, InProgress, NotStarted, Cancelled, Submitted, Failed",
+GET /api/v1/memberships/{id},requiredFrom,roles[].credentials[].requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships/{id},completedAt,roles[].credentials[].completedAt,Date and time the credential or transfer was completed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships/{id},validUntil,roles[].credentials[].validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC; expiration-boundary meaning remains unresolved
+GET /api/v1/memberships/{id},updatedAt,roles[].credentials[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships/{id},id,roles[].credentials[].credential.id,Credential definition UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},name,roles[].credentials[].credential.name,Credential definition name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},type,roles[].credentials[].credential.type,Type or category of the credential definition.,Yes,String,Maximum 9 characters,Yes,"SAFESPORT, LITMOS, NCSI",
+GET /api/v1/memberships/{id},id,roles[].waivers[].id,Role Waiver UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},profileId,roles[].waivers[].profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},memberId,roles[].waivers[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},type,roles[].waivers[].type,Type or category of the role waiver.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},status,roles[].waivers[].status,Current status of the role waiver.,Yes,String,Maximum 9 characters,No,Published,
+GET /api/v1/memberships/{id},requiredFrom,roles[].waivers[].requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships/{id},signedAt,roles[].waivers[].signedAt,Date and time the member signed the waiver.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/memberships/{id},validUntil,roles[].waivers[].validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC; expiration-boundary meaning remains unresolved
+GET /api/v1/memberships/{id},version,roles[].waivers[].version,Waiver version.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},updatedAt,roles[].waivers[].updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/memberships/{id},id,address.id,Address UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/memberships/{id},name,address.name,Address name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},street,address.street,Street portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},addressExtra,address.addressExtra,"Additional address information, such as a unit or suite.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},city,address.city,City portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},state,address.state,State or province portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},zipCode,address.zipCode,Postal code portion of the address.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/memberships/{id},amount,payment.amount,Payment amount.,Yes,Number,N/A,No,,
+GET /api/v1/memberships/{id},currency,payment.currency,Currency used for the payment.,Yes,String,3 characters,No,,
+GET /api/v1/memberships/{id},method,payment.method,Payment method.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/memberships/{id},transactionId,payment.transactionId,Payment processor transaction identifier.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/credentials,id,id,Credential assignment UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/credentials,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/credentials,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/credentials,credentialId,credentialId,Credential definition UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/credentials,credential,credential,Credential definition associated with the credential assignment.,Yes,Object,N/A,No,,
+GET /api/v1/credentials,status,status,Current status of the credential assignment.,Yes,String,Maximum 10 characters,No,"Completed, InProgress, NotStarted, Cancelled, Submitted, Failed",
+GET /api/v1/credentials,requiredFrom,requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/credentials,completedAt,completedAt,Date and time the credential or transfer was completed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/credentials,validUntil,validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC; expiration-boundary meaning remains unresolved
+GET /api/v1/credentials,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/credentials,id,credential.id,Credential definition UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/credentials,name,credential.name,Credential definition name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/credentials,type,credential.type,Type or category of the credential definition.,Yes,String,Maximum 9 characters,Yes,"SAFESPORT, LITMOS, NCSI",
+GET /api/v1/waivers,id,id,Composite identifier for the waiver.,Yes,String (composite ID),No maximum defined,No,,
+GET /api/v1/waivers,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/waivers,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/waivers,type,type,Type or category of the waiver.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/waivers,status,status,Current status of the waiver.,Yes,String,Maximum 9 characters,No,Published,
+GET /api/v1/waivers,requiredFrom,requiredFrom,Date and time the requirement begins to apply.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/waivers,signedAt,signedAt,Date and time the member signed the waiver.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/waivers,validUntil,validUntil,Credential or waiver expiration timestamp.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC; expiration-boundary meaning remains unresolved
+GET /api/v1/waivers,version,version,Waiver version.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/waivers,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/suspensions,id,id,Suspension UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/suspensions,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/suspensions,memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/suspensions,scope,scope,Descriptor for the requested eligibility scope.,Yes,String,Maximum 13 characters,No,"global, role-specific",
+GET /api/v1/suspensions,affectedRoles,affectedRoles,Role codes affected by the suspension; empty or null indicates a global suspension.,Yes,Array of strings,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/suspensions,reason,reason,Reason recorded for the suspension.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/suspensions,startDate,startDate,Start date or start timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/suspensions,endDate,endDate,End date or end timestamp for the record.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/suspensions,canceledAt,canceledAt,Date and time the suspension was canceled or lifted.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/suspensions,createdAt,createdAt,Date and time the record was created.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/suspensions,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/club-transfers,id,id,Club transfer UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/club-transfers,profileId,profileId,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/club-transfers,profile,profile,Related member Profile details.,Yes,Object,N/A,No,,
+GET /api/v1/club-transfers,fromClubId,fromClubId,Source Club UUID for the transfer.,Yes,String (UUID),36 characters,Yes,,UUID
+GET /api/v1/club-transfers,fromClub,fromClub,Source Club details for the transfer.,Yes,Object,N/A,Yes,,
+GET /api/v1/club-transfers,toClubId,toClubId,Destination Club UUID for the transfer.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/club-transfers,toClub,toClub,Destination Club details for the transfer.,Yes,Object,N/A,No,,
+GET /api/v1/club-transfers,status,status,Current status of the club transfer.,Yes,String,Maximum 10 characters,No,"Approved, Rejected, InTransfer",
+GET /api/v1/club-transfers,requestedAt,requestedAt,Date and time the Club transfer was requested.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/club-transfers,completedAt,completedAt,Date and time the credential or transfer was completed.,Yes,String (UTC timestamp),20 or 24 characters,Yes,,ISO 8601 UTC
+GET /api/v1/club-transfers,requestedBy,requestedBy,Identifier of the user who requested the Club transfer.,Yes,String,36 characters,Yes,,UUID
+GET /api/v1/club-transfers,updatedAt,updatedAt,Date and time the record was last updated.,Yes,String (UTC timestamp),20 or 24 characters,No,,ISO 8601 UTC
+GET /api/v1/club-transfers,id,profile.id,Profile UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/club-transfers,memberId,profile.memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/club-transfers,firstName,profile.firstName,Member first name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/club-transfers,lastName,profile.lastName,Member last name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/club-transfers,id,fromClub.id,Previous Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/club-transfers,name,fromClub.name,Previous Club name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/club-transfers,code,fromClub.code,Previous Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/club-transfers,id,toClub.id,Destination Club UUID.,Yes,String (UUID),36 characters,No,,UUID
+GET /api/v1/club-transfers,name,toClub.name,Destination Club name.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/club-transfers,code,toClub.code,Destination Club short code.,Yes,String,Minimum 1; no maximum defined,Yes,,
+POST /api/v1/eligibility/batch,windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+POST /api/v1/eligibility/batch,windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+POST /api/v1/eligibility/batch,memberId,data[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+POST /api/v1/eligibility/batch,memberFound,data[].memberFound,Whether the requested USAV member was found.,Yes,Boolean,N/A,No,,
+POST /api/v1/eligibility/batch,firstName,data[].firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,,
+POST /api/v1/eligibility/batch,lastName,data[].lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,,
+POST /api/v1/eligibility/batch,birthDate,data[].birthDate,Member date of birth.,No,String (date),10 characters,Yes,,YYYY-MM-DD
+POST /api/v1/eligibility/batch,gender,data[].gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female",
+POST /api/v1/eligibility/batch,graduationYear,data[].graduationYear,High-school graduation year.,No,Integer,N/A,Yes,,
+POST /api/v1/eligibility/batch,windowStart,data[].windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+POST /api/v1/eligibility/batch,windowEnd,data[].windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+POST /api/v1/eligibility/batch,roles,data[].roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,,
+POST /api/v1/eligibility/batch,role,data[].roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,,
+POST /api/v1/eligibility/batch,tier,data[].roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,,
+POST /api/v1/eligibility/batch,eligible,data[].roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+POST /api/v1/eligibility/batch,conditions,data[].roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,,
+POST /api/v1/eligibility/batch,condition,data[].roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,,
+POST /api/v1/eligibility/batch,passed,data[].roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+POST /api/v1/eligibility/batch,details,data[].roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,,
+GET /api/v1/eligibility/club/{clubId},scope,scope,Descriptor for the requested eligibility scope.,Yes,Object,N/A,No,,
+GET /api/v1/eligibility/club/{clubId},windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/club/{clubId},windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/club/{clubId},memberId,data[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/club/{clubId},memberFound,data[].memberFound,Whether the requested USAV member was found.,No,Boolean,N/A,No,,
+GET /api/v1/eligibility/club/{clubId},firstName,data[].firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/club/{clubId},lastName,data[].lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/club/{clubId},birthDate,data[].birthDate,Member date of birth.,No,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/eligibility/club/{clubId},gender,data[].gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female",
+GET /api/v1/eligibility/club/{clubId},graduationYear,data[].graduationYear,High-school graduation year.,No,Integer,N/A,Yes,,
+GET /api/v1/eligibility/club/{clubId},windowStart,data[].windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/club/{clubId},windowEnd,data[].windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/club/{clubId},roles,data[].roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,,
+GET /api/v1/eligibility/club/{clubId},type,scope.type,Type of eligibility scope requested.,Yes,String,Maximum 6 characters,No,"club, team, region",
+GET /api/v1/eligibility/club/{clubId},clubId,scope.clubId,Club UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/eligibility/club/{clubId},clubName,scope.clubName,Club display name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/club/{clubId},clubCode,scope.clubCode,Club Code component used in Team Code or the scoped Club code.,No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/club/{clubId},teamId,scope.teamId,Team UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/eligibility/club/{clubId},teamName,scope.teamName,Team display name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/club/{clubId},regionId,scope.regionId,Region UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/eligibility/club/{clubId},regionName,scope.regionName,Region display name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/club/{clubId},regionCode,scope.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/club/{clubId},role,data[].roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/club/{clubId},tier,data[].roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/club/{clubId},eligible,data[].roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+GET /api/v1/eligibility/club/{clubId},conditions,data[].roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,,
+GET /api/v1/eligibility/club/{clubId},condition,data[].roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/club/{clubId},passed,data[].roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+GET /api/v1/eligibility/club/{clubId},details,data[].roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,,
+GET /api/v1/eligibility/team/{teamId},scope,scope,Descriptor for the requested eligibility scope.,Yes,Object,N/A,No,,
+GET /api/v1/eligibility/team/{teamId},windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/team/{teamId},windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/team/{teamId},memberId,data[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/team/{teamId},memberFound,data[].memberFound,Whether the requested USAV member was found.,No,Boolean,N/A,No,,
+GET /api/v1/eligibility/team/{teamId},firstName,data[].firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/team/{teamId},lastName,data[].lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/team/{teamId},birthDate,data[].birthDate,Member date of birth.,No,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/eligibility/team/{teamId},gender,data[].gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female",
+GET /api/v1/eligibility/team/{teamId},graduationYear,data[].graduationYear,High-school graduation year.,No,Integer,N/A,Yes,,
+GET /api/v1/eligibility/team/{teamId},windowStart,data[].windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/team/{teamId},windowEnd,data[].windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/team/{teamId},roles,data[].roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,,
+GET /api/v1/eligibility/team/{teamId},type,scope.type,Type of eligibility scope requested.,Yes,String,Maximum 6 characters,No,"club, team, region",
+GET /api/v1/eligibility/team/{teamId},clubId,scope.clubId,Club UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/eligibility/team/{teamId},clubName,scope.clubName,Club display name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/team/{teamId},clubCode,scope.clubCode,Club Code component used in Team Code or the scoped Club code.,No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/team/{teamId},teamId,scope.teamId,Team UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/eligibility/team/{teamId},teamName,scope.teamName,Team display name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/team/{teamId},regionId,scope.regionId,Region UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/eligibility/team/{teamId},regionName,scope.regionName,Region display name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/team/{teamId},regionCode,scope.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/team/{teamId},role,data[].roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/team/{teamId},tier,data[].roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/team/{teamId},eligible,data[].roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+GET /api/v1/eligibility/team/{teamId},conditions,data[].roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,,
+GET /api/v1/eligibility/team/{teamId},condition,data[].roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/team/{teamId},passed,data[].roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+GET /api/v1/eligibility/team/{teamId},details,data[].roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,,
+GET /api/v1/eligibility/region/{regionId},scope,scope,Descriptor for the requested eligibility scope.,Yes,Object,N/A,No,,
+GET /api/v1/eligibility/region/{regionId},windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/region/{regionId},windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/region/{regionId},memberId,data[].memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/region/{regionId},memberFound,data[].memberFound,Whether the requested USAV member was found.,No,Boolean,N/A,No,,
+GET /api/v1/eligibility/region/{regionId},firstName,data[].firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/region/{regionId},lastName,data[].lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/region/{regionId},birthDate,data[].birthDate,Member date of birth.,No,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/eligibility/region/{regionId},gender,data[].gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female",
+GET /api/v1/eligibility/region/{regionId},graduationYear,data[].graduationYear,High-school graduation year.,No,Integer,N/A,Yes,,
+GET /api/v1/eligibility/region/{regionId},windowStart,data[].windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/region/{regionId},windowEnd,data[].windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/region/{regionId},roles,data[].roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,,
+GET /api/v1/eligibility/region/{regionId},type,scope.type,Type of eligibility scope requested.,Yes,String,Maximum 6 characters,No,"club, team, region",
+GET /api/v1/eligibility/region/{regionId},clubId,scope.clubId,Club UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/eligibility/region/{regionId},clubName,scope.clubName,Club display name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/region/{regionId},clubCode,scope.clubCode,Club Code component used in Team Code or the scoped Club code.,No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/region/{regionId},teamId,scope.teamId,Team UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/eligibility/region/{regionId},teamName,scope.teamName,Team display name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/region/{regionId},regionId,scope.regionId,Region UUID.,No,String (UUID),36 characters,No,,UUID
+GET /api/v1/eligibility/region/{regionId},regionName,scope.regionName,Region display name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/region/{regionId},regionCode,scope.regionCode,"Region or foreign-country component used in Team Code, or the scoped Region code.",No,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/region/{regionId},role,data[].roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/region/{regionId},tier,data[].roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/region/{regionId},eligible,data[].roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+GET /api/v1/eligibility/region/{regionId},conditions,data[].roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,,
+GET /api/v1/eligibility/region/{regionId},condition,data[].roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/region/{regionId},passed,data[].roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+GET /api/v1/eligibility/region/{regionId},details,data[].roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,,
+GET /api/v1/eligibility/{memberId},memberId,memberId,USAV member identifier.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/{memberId},memberFound,memberFound,Whether the requested USAV member was found.,Yes,Boolean,N/A,No,,
+GET /api/v1/eligibility/{memberId},firstName,firstName,Member first name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/{memberId},lastName,lastName,Member last name.,No,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/{memberId},birthDate,birthDate,Member date of birth.,No,String (date),10 characters,Yes,,YYYY-MM-DD
+GET /api/v1/eligibility/{memberId},gender,gender,Member birth gender used for division and eligibility evaluation.,No,String,Maximum 6 characters,Yes,"Male, Female",
+GET /api/v1/eligibility/{memberId},graduationYear,graduationYear,High-school graduation year.,No,Integer,N/A,Yes,,
+GET /api/v1/eligibility/{memberId},windowStart,windowStart,First day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/{memberId},windowEnd,windowEnd,Last day included in the eligibility evaluation window.,Yes,String (date),10 characters,No,,YYYY-MM-DD
+GET /api/v1/eligibility/{memberId},roles,roles,Roles returned for the member or membership.,Yes,Array of objects,N/A,No,,
+GET /api/v1/eligibility/{memberId},role,roles[].role,Role code evaluated for eligibility.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/{memberId},tier,roles[].tier,Membership tier details.,Yes,String,Minimum 1; no maximum defined,Yes,,
+GET /api/v1/eligibility/{memberId},eligible,roles[].eligible,Whether every eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+GET /api/v1/eligibility/{memberId},conditions,roles[].conditions,Per-condition eligibility results for the role.,Yes,Array of objects,N/A,No,,
+GET /api/v1/eligibility/{memberId},condition,roles[].conditions[].condition,Eligibility condition that was evaluated.,Yes,String,Minimum 1; no maximum defined,No,,
+GET /api/v1/eligibility/{memberId},passed,roles[].conditions[].passed,Whether the eligibility condition passed for the complete evaluation window.,Yes,Boolean,N/A,No,,
+GET /api/v1/eligibility/{memberId},details,roles[].conditions[].details,"Dates, values, or reasons supporting the eligibility-condition result.",Yes,Object,N/A,Yes,,
