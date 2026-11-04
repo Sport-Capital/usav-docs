@@ -1,16 +1,50 @@
 # MMS Partner API field dictionary
 
-Date: October 13, 2026
+Change history: see [CHANGELOG.md](CHANGELOG.md) and this file's Git history.
 
 For the complete field dictionary, including allowed values and formats, [view or download the CSV](mms-partner-api-response-data-dictionary.csv).
 
-Each endpoint lists its delivered record fields. The original field name is preserved, and Qualified name shows the field path when it is nested. Pagination is excluded.
+Each endpoint lists the filters it accepts, followed by the fields it returns. Endpoints appear in the same order as the CSV. Common paging and sorting parameters (`page`, `limit`, `sort`) are described in the [API documentation](api-documentation.md). In the CSV, the Kind column separates response fields from filters. The original field name is preserved, and Qualified name shows the field path when it is nested. Pagination is excluded.
 
 Required applies when the containing record is returned. Nullable means the field can contain null. No maximum defined means the current API contract and MMS database do not enforce a maximum for that field. Maximum not specified means the available source did not provide a limit.
 
 Definitions and constraints use the current API v2.1 documentation and the updated Sports Capital field-length file received October 13, 2026. The longest value observed in staging is not treated as a maximum length.
 
+## Contents
+
+| Endpoint | Filters | Response fields |
+| --- | --- | --- |
+| GET /api/v1/clubs | [Filters](#filters-for-get-apiv1clubs) | [Response fields](#response-fields-for-get-apiv1clubs) |
+| GET /api/v1/clubs/{id} | None | [Response fields](#response-fields-for-get-apiv1clubsid) |
+| GET /api/v1/regions | [Filters](#filters-for-get-apiv1regions) | [Response fields](#response-fields-for-get-apiv1regions) |
+| GET /api/v1/profiles | [Filters](#filters-for-get-apiv1profiles) | [Response fields](#response-fields-for-get-apiv1profiles) |
+| GET /api/v1/profiles/{id} | None | [Response fields](#response-fields-for-get-apiv1profilesid) |
+| GET /api/v1/teams | [Filters](#filters-for-get-apiv1teams) | [Response fields](#response-fields-for-get-apiv1teams) |
+| GET /api/v1/teams/{id} | [Filters](#filters-for-get-apiv1teamsid) | [Response fields](#response-fields-for-get-apiv1teamsid) |
+| GET /api/v1/memberships | [Filters](#filters-for-get-apiv1memberships) | [Response fields](#response-fields-for-get-apiv1memberships) |
+| GET /api/v1/memberships/{id} | None | [Response fields](#response-fields-for-get-apiv1membershipsid) |
+| GET /api/v1/credentials | [Filters](#filters-for-get-apiv1credentials) | [Response fields](#response-fields-for-get-apiv1credentials) |
+| GET /api/v1/waivers | [Filters](#filters-for-get-apiv1waivers) | [Response fields](#response-fields-for-get-apiv1waivers) |
+| GET /api/v1/suspensions | [Filters](#filters-for-get-apiv1suspensions) | [Response fields](#response-fields-for-get-apiv1suspensions) |
+| GET /api/v1/club-transfers | [Filters](#filters-for-get-apiv1club-transfers) | [Response fields](#response-fields-for-get-apiv1club-transfers) |
+| POST /api/v1/eligibility/batch | None | [Response fields](#response-fields-for-post-apiv1eligibilitybatch) |
+| GET /api/v1/eligibility/club/{clubId} | [Filters](#filters-for-get-apiv1eligibilityclubclubid) | [Response fields](#response-fields-for-get-apiv1eligibilityclubclubid) |
+| GET /api/v1/eligibility/team/{teamId} | [Filters](#filters-for-get-apiv1eligibilityteamteamid) | [Response fields](#response-fields-for-get-apiv1eligibilityteamteamid) |
+| GET /api/v1/eligibility/region/{regionId} | [Filters](#filters-for-get-apiv1eligibilityregionregionid) | [Response fields](#response-fields-for-get-apiv1eligibilityregionregionid) |
+| GET /api/v1/eligibility/{memberId} | [Filters](#filters-for-get-apiv1eligibilitymemberid) | [Response fields](#response-fields-for-get-apiv1eligibilitymemberid) |
+
 ## GET /api/v1/clubs
+
+### Filters for GET /api/v1/clubs
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| regionId | Filter by Region UUID. | String (UUID) | 36 characters | UUID |
+| regionCode | Exact Region code, not case sensitive. Alternative to regionId; sending both returns 400. Unknown or out-of-scope codes return an empty list. | String | 1 to 10 characters |  |
+| code | Exact Club code, not case sensitive; 5 letters or numbers. May return more than one Club. | String | 5 characters |  |
+| name | Partial Club name, not case sensitive. | String | 3 to 100 characters |  |
+
+### Response fields for GET /api/v1/clubs
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -31,7 +65,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | metadata | metadata | Additional metadata returned with the record. | Yes | Object | N/A | No |
 
-### Region fields
+#### Region fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -39,7 +73,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | region.name | Region name. | Yes | String | Minimum 1; no maximum defined | No |
 | code | region.code | Region short code. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Address fields
+#### Address fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -51,7 +85,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | state | address.state | State or province portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 | zipCode | address.zipCode | Postal code portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Contact fields
+#### Contact fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -60,7 +94,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | phone | contact.phone | Telephone number. | Yes | String | Minimum 1; no maximum defined | Yes |
 | role | contact.role | Contact person's role or title. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Location fields
+#### Location fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -73,6 +107,10 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/clubs/{id}
 
+This endpoint does not accept filters.
+
+### Response fields for GET /api/v1/clubs/{id}
+
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | id | Club UUID. | Yes | String (UUID) | 36 characters | No |
@@ -92,7 +130,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | metadata | metadata | Additional metadata returned with the record. | Yes | Object | N/A | No |
 
-### Region fields
+#### Region fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -100,7 +138,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | region.name | Region name. | Yes | String | Minimum 1; no maximum defined | No |
 | code | region.code | Region short code. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Address fields
+#### Address fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -112,7 +150,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | state | address.state | State or province portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 | zipCode | address.zipCode | Postal code portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Contact fields
+#### Contact fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -121,7 +159,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | phone | contact.phone | Telephone number. | Yes | String | Minimum 1; no maximum defined | Yes |
 | role | contact.role | Contact person's role or title. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Location fields
+#### Location fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -134,6 +172,15 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/regions
 
+### Filters for GET /api/v1/regions
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| code | Exact Region code, not case sensitive. | String | 1 to 10 characters |  |
+| name | Partial Region name, not case sensitive. | String | Minimum 3 |  |
+
+### Response fields for GET /api/v1/regions
+
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | id | Region UUID. | Yes | String (UUID) | 36 characters | No |
@@ -142,6 +189,20 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/profiles
 
+### Filters for GET /api/v1/profiles
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| memberId | Filter by USAV member identifier. | String | Minimum 1 |  |
+| status | Filter by status. | String | N/A | active, inactive |
+| regionId | Filter by Region UUID. | String (UUID) | 36 characters | UUID |
+| regionCode | Exact Region code, not case sensitive. Alternative to regionId; sending both returns 400. Unknown or out-of-scope codes return an empty list. | String | 1 to 10 characters |  |
+| graduationYear | Exact high-school graduation year. | Integer | N/A |  |
+| graduationYear[gte] | Graduation year greater than or equal to this value. | Integer | N/A |  |
+| graduationYear[lte] | Graduation year less than or equal to this value. | Integer | N/A |  |
+
+### Response fields for GET /api/v1/profiles
+
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | id | Profile UUID. | Yes | String (UUID) | 36 characters | No |
@@ -149,6 +210,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | firstName | firstName | Member first name. | Yes | String | Minimum 1; no maximum defined | No |
 | lastName | lastName | Member last name. | Yes | String | Minimum 1; no maximum defined | No |
 | middleName | middleName | Member middle name. | Yes | String | Minimum 1; no maximum defined | Yes |
+| preferredName | preferredName | The name the member prefers, when set. Never replaces the legal firstName. | Yes | String | Minimum 1; no maximum defined | Yes |
 | birthDate | birthDate | Member date of birth. | Yes | String (date) | 10 characters | Yes |
 | gender | gender | Member birth gender used for division and eligibility evaluation. | Yes | String | Maximum 6 characters | Yes |
 | genderIdentity | genderIdentity | Preferred display gender identity. | Yes | String | Maximum 10 characters | Yes |
@@ -165,7 +227,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | createdAt | createdAt | Date and time the record was created. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Address fields
+#### Address fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -177,7 +239,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | state | address.state | State or province portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 | zipCode | address.zipCode | Postal code portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Guardian fields
+#### Guardian fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -185,7 +247,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | email | guardians[].email | Email address. | Yes | String | No maximum defined | Yes |
 | isMainGuardian | guardians[].isMainGuardian | Whether this guardian is the primary guardian. | Yes | Boolean | N/A | No |
 
-### Suspension fields
+#### Suspension fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -201,7 +263,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | createdAt | suspensions[].createdAt | Date and time the record was created. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | updatedAt | suspensions[].updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Demographics fields
+#### Demographics fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -209,14 +271,14 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | disability | demographics.disability | Whether the Profile records a disability indicator. | Yes | Boolean | N/A | Yes |
 | militaryService | demographics.militaryService | Whether the Profile records military service. | Yes | Boolean | N/A | Yes |
 
-### Preferences fields
+#### Preferences fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | ncsaShareAgreed | preferences.ncsaShareAgreed | Whether the member agreed to NCSA data sharing. | Yes | Boolean | N/A | Yes |
 | ncsaShareAgreedAt | preferences.ncsaShareAgreedAt | Date and time the NCSA sharing choice was recorded. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
 
-### Education fields
+#### Education fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -224,6 +286,10 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/profiles/{id}
 
+This endpoint does not accept filters.
+
+### Response fields for GET /api/v1/profiles/{id}
+
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | id | Profile UUID. | Yes | String (UUID) | 36 characters | No |
@@ -231,6 +297,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | firstName | firstName | Member first name. | Yes | String | Minimum 1; no maximum defined | No |
 | lastName | lastName | Member last name. | Yes | String | Minimum 1; no maximum defined | No |
 | middleName | middleName | Member middle name. | Yes | String | Minimum 1; no maximum defined | Yes |
+| preferredName | preferredName | The name the member prefers, when set. Never replaces the legal firstName. | Yes | String | Minimum 1; no maximum defined | Yes |
 | birthDate | birthDate | Member date of birth. | Yes | String (date) | 10 characters | Yes |
 | gender | gender | Member birth gender used for division and eligibility evaluation. | Yes | String | Maximum 6 characters | Yes |
 | genderIdentity | genderIdentity | Preferred display gender identity. | Yes | String | Maximum 10 characters | Yes |
@@ -247,7 +314,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | createdAt | createdAt | Date and time the record was created. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Address fields
+#### Address fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -259,7 +326,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | state | address.state | State or province portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 | zipCode | address.zipCode | Postal code portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Guardian fields
+#### Guardian fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -267,7 +334,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | email | guardians[].email | Email address. | Yes | String | No maximum defined | Yes |
 | isMainGuardian | guardians[].isMainGuardian | Whether this guardian is the primary guardian. | Yes | Boolean | N/A | No |
 
-### Suspension fields
+#### Suspension fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -283,7 +350,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | createdAt | suspensions[].createdAt | Date and time the record was created. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | updatedAt | suspensions[].updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Demographics fields
+#### Demographics fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -291,20 +358,37 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | disability | demographics.disability | Whether the Profile records a disability indicator. | Yes | Boolean | N/A | Yes |
 | militaryService | demographics.militaryService | Whether the Profile records military service. | Yes | Boolean | N/A | Yes |
 
-### Preferences fields
+#### Preferences fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | ncsaShareAgreed | preferences.ncsaShareAgreed | Whether the member agreed to NCSA data sharing. | Yes | Boolean | N/A | Yes |
 | ncsaShareAgreedAt | preferences.ncsaShareAgreedAt | Date and time the NCSA sharing choice was recorded. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
 
-### Education fields
+#### Education fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | graduationYear | education.graduationYear | High-school graduation year. | Yes | Integer | N/A | Yes |
 
 ## GET /api/v1/teams
+
+### Filters for GET /api/v1/teams
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| clubId | Filter by parent Club UUID. | String (UUID) | 36 characters | UUID |
+| regionId | Filter by Region UUID. | String (UUID) | 36 characters | UUID |
+| regionCode | Exact Region code, not case sensitive. Alternative to regionId; sending both returns 400. Unknown or out-of-scope codes return an empty list. | String | 1 to 10 characters |  |
+| ageDefinition | Filter by junior age division. | String | N/A | 8U, 9U, 10U, 11U, 12U, 13U, 14U, 15U, 16U, 17U, 18U |
+| gender | Filter by Team gender. | String | N/A | Male, Female, Co-Ed |
+| type | Filter by type. | String | N/A | Indoor, Beach, Grass |
+| status | Filter by status. | String | N/A | active, inactive |
+| name | Partial Team name, not case sensitive. | String | 3 to 100 characters |  |
+| clubCode | Exact parent Club code, not case sensitive; 5 letters or numbers. | String | 5 characters |  |
+| teamCode | Exact generated Team Code, not case sensitive. Unknown codes return an empty list. | String | 13 or 14 characters |  |
+
+### Response fields for GET /api/v1/teams
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -329,7 +413,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | createdAt | createdAt | Date and time the record was created. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Club fields
+#### Club fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -337,7 +421,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | club.name | Club name. | Yes | String | Minimum 1; no maximum defined | No |
 | code | club.code | Club short code. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Team Code Components fields
+#### Team Code Components fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -348,7 +432,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | teamRank | teamCodeComponents.teamRank | Two-digit Team rank component used in Team Code. | Yes | String | 2 characters | Yes |
 | regionCode | teamCodeComponents.regionCode | Region or foreign-country component used in Team Code, or the scoped Region code. | Yes | String | 2 to 3 characters | Yes |
 
-### Team Member fields
+#### Team Member fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -356,8 +440,12 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | profile | members[].profile | Related member Profile details. | Yes | Object | N/A | No |
 | role | members[].role | Member role on the Team. | Yes | String | Minimum 1; no maximum defined | Yes |
 | joinedAt | members[].joinedAt | Date and time the member joined the Team. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
+| jerseyNumber | members[].jerseyNumber | Jersey number. | Yes | Integer | N/A | Yes |
+| positions | members[].positions | Playing positions. | Yes | Array of strings | N/A | No |
+| frozen | members[].frozen | Whether the roster entry is frozen. | Yes | Boolean | N/A | No |
+| frozenAt | members[].frozenAt | Date and time the roster entry was frozen. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
 
-### Team Member Profile fields
+#### Team Member Profile fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -370,6 +458,14 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/teams/{id}
 
+### Filters for GET /api/v1/teams/{id}
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| expand | Related objects to include, as a comma-separated list: members, club. | String | N/A |  |
+
+### Response fields for GET /api/v1/teams/{id}
+
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | id | Team UUID. | Yes | String (UUID) | 36 characters | No |
@@ -393,7 +489,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | createdAt | createdAt | Date and time the record was created. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Club fields
+#### Club fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -401,7 +497,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | club.name | Club name. | Yes | String | Minimum 1; no maximum defined | No |
 | code | club.code | Club short code. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Team Code Components fields
+#### Team Code Components fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -412,7 +508,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | teamRank | teamCodeComponents.teamRank | Two-digit Team rank component used in Team Code. | Yes | String | 2 characters | Yes |
 | regionCode | teamCodeComponents.regionCode | Region or foreign-country component used in Team Code, or the scoped Region code. | Yes | String | 2 to 3 characters | Yes |
 
-### Team Member fields
+#### Team Member fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -420,8 +516,12 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | profile | members[].profile | Related member Profile details. | Yes | Object | N/A | No |
 | role | members[].role | Member role on the Team. | Yes | String | Minimum 1; no maximum defined | Yes |
 | joinedAt | members[].joinedAt | Date and time the member joined the Team. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
+| jerseyNumber | members[].jerseyNumber | Jersey number. | Yes | Integer | N/A | Yes |
+| positions | members[].positions | Playing positions. | Yes | Array of strings | N/A | No |
+| frozen | members[].frozen | Whether the roster entry is frozen. | Yes | Boolean | N/A | No |
+| frozenAt | members[].frozenAt | Date and time the roster entry was frozen. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
 
-### Team Member Profile fields
+#### Team Member Profile fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -434,6 +534,25 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/memberships
 
+### Filters for GET /api/v1/memberships
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| profileId | Filter by Profile UUID. | String (UUID) | 36 characters | UUID |
+| memberId | Filter by USAV member identifier. | String | Minimum 1 |  |
+| regionId | Filter by Region UUID. | String (UUID) | 36 characters | UUID |
+| regionCode | Exact Region code, not case sensitive. Alternative to regionId; sending both returns 400. Unknown or out-of-scope codes return an empty list. | String | 1 to 10 characters |  |
+| tierId | Filter by membership tier UUID. | String (UUID) | 36 characters | UUID |
+| tier.category | Filter by membership tier category. | String | N/A | Full, Limited |
+| tier.windowType | Filter by how the membership tier validity window is set. | String | N/A | FullSeason, Days, DateRange |
+| status | Filter by status. | String | N/A | Paid, Unpaid, Canceled, Suspended, Expired |
+| startDate[gte] | Start date on or after this date. | String | N/A | YYYY-MM-DD |
+| startDate[lte] | Start date on or before this date. | String | N/A | YYYY-MM-DD |
+| endDate[gte] | End date on or after this date. | String | N/A | YYYY-MM-DD |
+| endDate[lte] | End date on or before this date. | String | N/A | YYYY-MM-DD |
+
+### Response fields for GET /api/v1/memberships
+
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | id | Membership UUID. | Yes | String (UUID) | 36 characters | No |
@@ -451,7 +570,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | createdAt | createdAt | Date and time the record was created. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Profile fields
+#### Profile fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -460,7 +579,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | firstName | profile.firstName | Member first name. | Yes | String | Minimum 1; no maximum defined | No |
 | lastName | profile.lastName | Member last name. | Yes | String | Minimum 1; no maximum defined | No |
 
-### Region fields
+#### Region fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -468,7 +587,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | region.name | Region name. | Yes | String | Minimum 1; no maximum defined | No |
 | code | region.code | Region short code. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Membership Role fields
+#### Membership Role fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -484,14 +603,14 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | waivers | roles[].waivers | Waivers associated with the membership role. | Yes | Array of objects | N/A | No |
 | updatedAt | roles[].updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Role fields
+#### Role fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | roles[].role.id | Role UUID. | Yes | String (UUID) | 36 characters | No |
 | name | roles[].role.name | Role name. | Yes | String | Minimum 1; no maximum defined | No |
 
-### Tier fields
+#### Tier fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -505,14 +624,14 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowEnd | roles[].tier.windowEnd | End date of an explicit membership tier validity window. | Yes | String (date) | 10 characters | Yes |
 | restrictions | roles[].tier.restrictions | Restrictions associated with the membership tier. | Yes | Object | N/A | No |
 
-### Tier Restrictions fields
+#### Tier Restrictions fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | maxRoles | roles[].tier.restrictions.maxRoles | Maximum number of roles allowed by the membership tier. | Yes | Integer | N/A | Yes |
 | allowedTypes | roles[].tier.restrictions.allowedTypes | Volleyball types allowed by the membership tier. | Yes | Array of strings | Each value: maximum 7 characters | No |
 
-### Club Assignment fields
+#### Club Assignment fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -521,7 +640,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | status | roles[].clubAssignment.status | Current status of the club assignment. | Yes | String | Maximum 11 characters | No |
 | assignedAt | roles[].clubAssignment.assignedAt | Date and time the Club assignment was made. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
 
-### Assigned Club fields
+#### Assigned Club fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -529,14 +648,14 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | roles[].clubAssignment.club.name | Assigned Club name. | Yes | String | Minimum 1; no maximum defined | No |
 | code | roles[].clubAssignment.club.code | Assigned Club short code. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Role Eligibility fields
+#### Role Eligibility fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | isEligible | roles[].eligibility.isEligible | Stored eligibility indicator for the membership role. | Yes | Boolean | N/A | No |
 | reasons | roles[].eligibility.reasons | Reasons supporting the stored eligibility result. | Yes | Array of strings | No maximum defined | No |
 
-### Role Credential fields
+#### Role Credential fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -551,7 +670,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | validUntil | roles[].credentials[].validUntil | Credential or waiver expiration timestamp. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
 | updatedAt | roles[].credentials[].updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Credential Definition fields
+#### Credential Definition fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -559,7 +678,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | roles[].credentials[].credential.name | Credential definition name. | Yes | String | Minimum 1; no maximum defined | No |
 | type | roles[].credentials[].credential.type | Type or category of the credential definition. | Yes | String | Maximum 9 characters | Yes |
 
-### Role Waiver fields
+#### Role Waiver fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -574,7 +693,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | version | roles[].waivers[].version | Waiver version. | Yes | String | Minimum 1; no maximum defined | Yes |
 | updatedAt | roles[].waivers[].updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Address fields
+#### Address fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -586,7 +705,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | state | address.state | State or province portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 | zipCode | address.zipCode | Postal code portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Payment fields
+#### Payment fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -597,6 +716,10 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/memberships/{id}
 
+This endpoint does not accept filters.
+
+### Response fields for GET /api/v1/memberships/{id}
+
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | id | Membership UUID. | Yes | String (UUID) | 36 characters | No |
@@ -614,7 +737,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | createdAt | createdAt | Date and time the record was created. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Profile fields
+#### Profile fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -623,7 +746,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | firstName | profile.firstName | Member first name. | Yes | String | Minimum 1; no maximum defined | No |
 | lastName | profile.lastName | Member last name. | Yes | String | Minimum 1; no maximum defined | No |
 
-### Region fields
+#### Region fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -631,7 +754,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | region.name | Region name. | Yes | String | Minimum 1; no maximum defined | No |
 | code | region.code | Region short code. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Membership Role fields
+#### Membership Role fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -647,14 +770,14 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | waivers | roles[].waivers | Waivers associated with the membership role. | Yes | Array of objects | N/A | No |
 | updatedAt | roles[].updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Role fields
+#### Role fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | roles[].role.id | Role UUID. | Yes | String (UUID) | 36 characters | No |
 | name | roles[].role.name | Role name. | Yes | String | Minimum 1; no maximum defined | No |
 
-### Tier fields
+#### Tier fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -668,14 +791,14 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowEnd | roles[].tier.windowEnd | End date of an explicit membership tier validity window. | Yes | String (date) | 10 characters | Yes |
 | restrictions | roles[].tier.restrictions | Restrictions associated with the membership tier. | Yes | Object | N/A | No |
 
-### Tier Restrictions fields
+#### Tier Restrictions fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | maxRoles | roles[].tier.restrictions.maxRoles | Maximum number of roles allowed by the membership tier. | Yes | Integer | N/A | Yes |
 | allowedTypes | roles[].tier.restrictions.allowedTypes | Volleyball types allowed by the membership tier. | Yes | Array of strings | Each value: maximum 7 characters | No |
 
-### Club Assignment fields
+#### Club Assignment fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -684,7 +807,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | status | roles[].clubAssignment.status | Current status of the club assignment. | Yes | String | Maximum 11 characters | No |
 | assignedAt | roles[].clubAssignment.assignedAt | Date and time the Club assignment was made. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
 
-### Assigned Club fields
+#### Assigned Club fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -692,14 +815,14 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | roles[].clubAssignment.club.name | Assigned Club name. | Yes | String | Minimum 1; no maximum defined | No |
 | code | roles[].clubAssignment.club.code | Assigned Club short code. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Role Eligibility fields
+#### Role Eligibility fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | isEligible | roles[].eligibility.isEligible | Stored eligibility indicator for the membership role. | Yes | Boolean | N/A | No |
 | reasons | roles[].eligibility.reasons | Reasons supporting the stored eligibility result. | Yes | Array of strings | No maximum defined | No |
 
-### Role Credential fields
+#### Role Credential fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -714,7 +837,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | validUntil | roles[].credentials[].validUntil | Credential or waiver expiration timestamp. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
 | updatedAt | roles[].credentials[].updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Credential Definition fields
+#### Credential Definition fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -722,7 +845,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | roles[].credentials[].credential.name | Credential definition name. | Yes | String | Minimum 1; no maximum defined | No |
 | type | roles[].credentials[].credential.type | Type or category of the credential definition. | Yes | String | Maximum 9 characters | Yes |
 
-### Role Waiver fields
+#### Role Waiver fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -737,7 +860,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | version | roles[].waivers[].version | Waiver version. | Yes | String | Minimum 1; no maximum defined | Yes |
 | updatedAt | roles[].waivers[].updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Address fields
+#### Address fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -749,7 +872,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | state | address.state | State or province portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 | zipCode | address.zipCode | Postal code portion of the address. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Payment fields
+#### Payment fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -759,6 +882,19 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | transactionId | payment.transactionId | Payment processor transaction identifier. | Yes | String | Minimum 1; no maximum defined | Yes |
 
 ## GET /api/v1/credentials
+
+### Filters for GET /api/v1/credentials
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| profileId | Filter by Profile UUID. | String (UUID) | 36 characters | UUID |
+| memberId | Filter by USAV member identifier. | String | Minimum 1 |  |
+| type | Filter by type. | String | N/A | SAFESPORT, LITMOS, NCSI |
+| status | Filter by status. | String | N/A | Completed, InProgress, NotStarted, Cancelled, Submitted, Failed, Inactive |
+| validUntil[gte] | Valid-until date on or after this date. | String | N/A | YYYY-MM-DD |
+| validUntil[lte] | Valid-until date on or before this date. | String | N/A | YYYY-MM-DD |
+
+### Response fields for GET /api/v1/credentials
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -773,7 +909,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | validUntil | validUntil | Credential or waiver expiration timestamp. | Yes | String (UTC timestamp) | 20 or 24 characters | Yes |
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Credential Definition fields
+#### Credential Definition fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -782,6 +918,19 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | type | credential.type | Type or category of the credential definition. | Yes | String | Maximum 9 characters | Yes |
 
 ## GET /api/v1/waivers
+
+### Filters for GET /api/v1/waivers
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| profileId | Filter by Profile UUID. | String (UUID) | 36 characters | UUID |
+| memberId | Filter by USAV member identifier. | String | Minimum 1 |  |
+| type | Filter by type. | String | Minimum 1 |  |
+| status | Filter by status. | String | N/A | Published |
+| validUntil[gte] | Valid-until date on or after this date. | String | N/A | YYYY-MM-DD |
+| validUntil[lte] | Valid-until date on or before this date. | String | N/A | YYYY-MM-DD |
+
+### Response fields for GET /api/v1/waivers
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -797,6 +946,21 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
 ## GET /api/v1/suspensions
+
+### Filters for GET /api/v1/suspensions
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| profileId | Filter by Profile UUID. | String (UUID) | 36 characters | UUID |
+| memberId | Filter by USAV member identifier. | String | Minimum 1 |  |
+| scope | Filter by suspension scope. | String | N/A | global, role-specific |
+| active | Filter by whether the suspension is active. | Boolean | N/A |  |
+| startDate[gte] | Start date on or after this date. | String | N/A | YYYY-MM-DD |
+| startDate[lte] | Start date on or before this date. | String | N/A | YYYY-MM-DD |
+| endDate[gte] | End date on or after this date. | String | N/A | YYYY-MM-DD |
+| endDate[lte] | End date on or before this date. | String | N/A | YYYY-MM-DD |
+
+### Response fields for GET /api/v1/suspensions
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -814,6 +978,19 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/club-transfers
 
+### Filters for GET /api/v1/club-transfers
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| profileId | Filter by Profile UUID. | String (UUID) | 36 characters | UUID |
+| fromClubId | Filter by the Club the member is leaving. | String (UUID) | 36 characters | UUID |
+| toClubId | Filter by the Club the member is joining. | String (UUID) | 36 characters | UUID |
+| status | Filter by status. | String | N/A | Approved, Rejected, InTransfer |
+| requestedAt[gte] | Requested on or after this date. | String | N/A | YYYY-MM-DD |
+| requestedAt[lte] | Requested on or before this date. | String | N/A | YYYY-MM-DD |
+
+### Response fields for GET /api/v1/club-transfers
+
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | id | id | Club transfer UUID. | Yes | String (UUID) | 36 characters | No |
@@ -829,7 +1006,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | requestedBy | requestedBy | Identifier of the user who requested the Club transfer. | Yes | String | 36 characters | Yes |
 | updatedAt | updatedAt | Date and time the record was last updated. | Yes | String (UTC timestamp) | 20 or 24 characters | No |
 
-### Profile fields
+#### Profile fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -838,7 +1015,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | firstName | profile.firstName | Member first name. | Yes | String | Minimum 1; no maximum defined | No |
 | lastName | profile.lastName | Member last name. | Yes | String | Minimum 1; no maximum defined | No |
 
-### Previous Club fields
+#### Previous Club fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -846,7 +1023,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | name | fromClub.name | Previous Club name. | Yes | String | Minimum 1; no maximum defined | No |
 | code | fromClub.code | Previous Club short code. | Yes | String | Minimum 1; no maximum defined | Yes |
 
-### Destination Club fields
+#### Destination Club fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -856,14 +1033,18 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## POST /api/v1/eligibility/batch
 
-### Response fields
+This endpoint does not accept filters.
+
+### Response fields for POST /api/v1/eligibility/batch
+
+#### Response fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
 | windowStart | windowStart | First day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 | windowEnd | windowEnd | Last day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 
-### Member Result fields
+#### Member Result fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -878,7 +1059,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowEnd | data[].windowEnd | Last day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 | roles | data[].roles | Roles returned for the member or membership. | Yes | Array of objects | N/A | No |
 
-### Role Evaluation fields
+#### Role Evaluation fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -887,7 +1068,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | eligible | data[].roles[].eligible | Whether every eligibility condition passed for the complete evaluation window. | Yes | Boolean | N/A | No |
 | conditions | data[].roles[].conditions | Per-condition eligibility results for the role. | Yes | Array of objects | N/A | No |
 
-### Eligibility Condition fields
+#### Eligibility Condition fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -897,7 +1078,19 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/eligibility/club/{clubId}
 
-### Response fields
+### Filters for GET /api/v1/eligibility/club/{clubId}
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| startDate | First day of the evaluation window. Defaults to today. | String | N/A | YYYY-MM-DD |
+| endDate | Last day of the evaluation window. Defaults to today. | String | N/A | YYYY-MM-DD |
+| role | Limit results to one role code. | String | Minimum 1 |  |
+| eligibility | Filter by eligibility result. | Boolean | N/A |  |
+| clubAssignmentStatus | Filter by club assignment status. | String | N/A | APPROVED, REJECTED, IN_TRANSFER |
+
+### Response fields for GET /api/v1/eligibility/club/{clubId}
+
+#### Response fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -905,7 +1098,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowStart | windowStart | First day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 | windowEnd | windowEnd | Last day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 
-### Member Result fields
+#### Member Result fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -920,7 +1113,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowEnd | data[].windowEnd | Last day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 | roles | data[].roles | Roles returned for the member or membership. | Yes | Array of objects | N/A | No |
 
-### Scope fields
+#### Scope fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -934,7 +1127,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | regionName | scope.regionName | Region display name. | No | String | Minimum 1; no maximum defined | No |
 | regionCode | scope.regionCode | Region or foreign-country component used in Team Code, or the scoped Region code. | No | String | Minimum 1; no maximum defined | Yes |
 
-### Role Evaluation fields
+#### Role Evaluation fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -943,7 +1136,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | eligible | data[].roles[].eligible | Whether every eligibility condition passed for the complete evaluation window. | Yes | Boolean | N/A | No |
 | conditions | data[].roles[].conditions | Per-condition eligibility results for the role. | Yes | Array of objects | N/A | No |
 
-### Eligibility Condition fields
+#### Eligibility Condition fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -953,7 +1146,19 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/eligibility/team/{teamId}
 
-### Response fields
+### Filters for GET /api/v1/eligibility/team/{teamId}
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| startDate | First day of the evaluation window. Defaults to today. | String | N/A | YYYY-MM-DD |
+| endDate | Last day of the evaluation window. Defaults to today. | String | N/A | YYYY-MM-DD |
+| role | Limit results to one role code. | String | Minimum 1 |  |
+| eligibility | Filter by eligibility result. | Boolean | N/A |  |
+| clubAssignmentStatus | Filter by club assignment status. | String | N/A | APPROVED, REJECTED, IN_TRANSFER |
+
+### Response fields for GET /api/v1/eligibility/team/{teamId}
+
+#### Response fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -961,7 +1166,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowStart | windowStart | First day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 | windowEnd | windowEnd | Last day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 
-### Member Result fields
+#### Member Result fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -976,7 +1181,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowEnd | data[].windowEnd | Last day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 | roles | data[].roles | Roles returned for the member or membership. | Yes | Array of objects | N/A | No |
 
-### Scope fields
+#### Scope fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -990,7 +1195,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | regionName | scope.regionName | Region display name. | No | String | Minimum 1; no maximum defined | No |
 | regionCode | scope.regionCode | Region or foreign-country component used in Team Code, or the scoped Region code. | No | String | Minimum 1; no maximum defined | Yes |
 
-### Role Evaluation fields
+#### Role Evaluation fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -999,7 +1204,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | eligible | data[].roles[].eligible | Whether every eligibility condition passed for the complete evaluation window. | Yes | Boolean | N/A | No |
 | conditions | data[].roles[].conditions | Per-condition eligibility results for the role. | Yes | Array of objects | N/A | No |
 
-### Eligibility Condition fields
+#### Eligibility Condition fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1009,7 +1214,19 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/eligibility/region/{regionId}
 
-### Response fields
+### Filters for GET /api/v1/eligibility/region/{regionId}
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| startDate | First day of the evaluation window. Defaults to today. | String | N/A | YYYY-MM-DD |
+| endDate | Last day of the evaluation window. Defaults to today. | String | N/A | YYYY-MM-DD |
+| role | Limit results to one role code. | String | Minimum 1 |  |
+| eligibility | Filter by eligibility result. | Boolean | N/A |  |
+| clubAssignmentStatus | Filter by club assignment status. | String | N/A | APPROVED, REJECTED, IN_TRANSFER |
+
+### Response fields for GET /api/v1/eligibility/region/{regionId}
+
+#### Response fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1017,7 +1234,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowStart | windowStart | First day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 | windowEnd | windowEnd | Last day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 
-### Member Result fields
+#### Member Result fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1032,7 +1249,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowEnd | data[].windowEnd | Last day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 | roles | data[].roles | Roles returned for the member or membership. | Yes | Array of objects | N/A | No |
 
-### Scope fields
+#### Scope fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1046,7 +1263,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | regionName | scope.regionName | Region display name. | No | String | Minimum 1; no maximum defined | No |
 | regionCode | scope.regionCode | Region or foreign-country component used in Team Code, or the scoped Region code. | No | String | Minimum 1; no maximum defined | Yes |
 
-### Role Evaluation fields
+#### Role Evaluation fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1055,7 +1272,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | eligible | data[].roles[].eligible | Whether every eligibility condition passed for the complete evaluation window. | Yes | Boolean | N/A | No |
 | conditions | data[].roles[].conditions | Per-condition eligibility results for the role. | Yes | Array of objects | N/A | No |
 
-### Eligibility Condition fields
+#### Eligibility Condition fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1065,7 +1282,16 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 
 ## GET /api/v1/eligibility/{memberId}
 
-### Member fields
+### Filters for GET /api/v1/eligibility/{memberId}
+
+| Parameter | Definition | Data type | Length | Allowed values or format |
+| --- | --- | --- | --- | --- |
+| startDate | First day of the evaluation window. Defaults to today. | String | N/A | YYYY-MM-DD |
+| endDate | Last day of the evaluation window. Defaults to today. | String | N/A | YYYY-MM-DD |
+
+### Response fields for GET /api/v1/eligibility/{memberId}
+
+#### Member fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1080,7 +1306,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | windowEnd | windowEnd | Last day included in the eligibility evaluation window. | Yes | String (date) | 10 characters | No |
 | roles | roles | Roles returned for the member or membership. | Yes | Array of objects | N/A | No |
 
-### Role Evaluation fields
+#### Role Evaluation fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1089,7 +1315,7 @@ Definitions and constraints use the current API v2.1 documentation and the updat
 | eligible | roles[].eligible | Whether every eligibility condition passed for the complete evaluation window. | Yes | Boolean | N/A | No |
 | conditions | roles[].conditions | Per-condition eligibility results for the role. | Yes | Array of objects | N/A | No |
 
-### Eligibility Condition fields
+#### Eligibility Condition fields
 
 | Field | Qualified name | Definition | Required | Data type | Length | Nullable |
 | --- | --- | --- | --- | --- | --- | --- |
