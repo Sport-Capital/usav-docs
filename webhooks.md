@@ -22,7 +22,7 @@ Partners must build receivers as idempotent consumers. Store the webhook event i
 
 ## Subscription setup
 
-Webhook subscriptions are managed by USAV through MMS. There is no partner self-service Partner API endpoint for subscription management in the launch contract.
+Webhook subscriptions are managed in the Developer Portal. If webhooks are not yet turned on for your account, contact USAV.
 
 A subscription contains:
 

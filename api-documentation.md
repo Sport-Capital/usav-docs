@@ -1,35 +1,35 @@
 # USA Volleyball API Documentation
 
-**Author:** Alex Wilson / USAV Engineering
-**Date:** 2026-04-27
-**Updated:** 2026-06-12
-**Version:** 2.1
-**Database:** Volleyball Data Hub (VDH)
-**Status:** Current partner-facing version. Supersedes v2.0 (`api-documentation-v2.0.md`).
+**API version:** 2.1 (served under `/api/v1`)
+**Status:** Current partner-facing version.
+**History:** See [CHANGELOG.md](CHANGELOG.md) and this file's Git history. Older documents are in [archive/](archive/).
 
-## June 2026 Team Code Standardization
-
-Version 2.1 was updated to align Team responses with the USAV Data Standards Group Team Code standard. The update:
-
-- establishes Team Code uniqueness across the USAV ecosystem;
-- retains Team UUID as the authoritative, immutable API identifier;
-- replaces `ageCode` with separate `ageGroup` and `playLevel` components;
-- standardizes `genderCode` as `M`, `F`, or `C`;
-- defines Club Code format and uniqueness scope;
-- supports two-character USAV Region Codes and three-character foreign codes; and
-- documents when Team Code generation may return `null`.
+For the complete list of fields and filters for each endpoint, see the [field dictionary](mms-partner-api-response-data-dictionary.md).
 
 ---
 
 ## Introduction
 
-The USA Volleyball API provides programmatic access to volleyball organization data including clubs, teams, member profiles, memberships, credentials, waivers, suspensions, club transfers, and eligibility verification. Version 2.1 expands the v2.0 surface with twelve new endpoints, a redesigned Eligibility API that supports date-range queries and returns every role a member holds in a single call, and a new authentication model that distinguishes multi-region operator keys from single-region admin keys.
+The USA Volleyball API provides programmatic access to volleyball organization data including clubs, teams, member profiles, memberships, credentials, waivers, suspensions, club transfers, and eligibility verification. Version 2.1 expands the v2.0 surface with twelve new endpoints, a redesigned Eligibility API that supports date-range queries and returns every role a member holds in a single call, and API keys that partners manage through the Developer Portal.
+
+---
+
+## Getting Access
+
+Partners request access through the USAV Developer Portal. USAV reviews each request and sets the data the partner may access. See the [README](README.md) for the steps.
+
+| Environment | Base URL | API reference |
+|---|---|---|
+| Sandbox | `https://api-sandbox.usavolleyball.org` | `https://api-sandbox.usavolleyball.org/reference` |
+| Production | `https://api.usavolleyball.org` | `https://api.usavolleyball.org/reference` |
+
+Sandbox keys only work against the Sandbox API, and Production keys only work against the Production API.
 
 ---
 
 ## Authentication
 
-The USA Volleyball API uses bearer-token API keys to authenticate requests. v2.1 introduces a two-tier key model that distinguishes broad operator integrations from narrower region-scoped admin integrations.
+The USA Volleyball API uses bearer-token API keys to authenticate requests.
 
 ### API Key Format
 
@@ -43,27 +43,34 @@ Include your API key in the request header:
 Authorization: Bearer usav_abc123...
 ```
 
-### API Key Types
+### API Key Access
 
-| Key type | Scope | Typical caller |
-|---|---|---|
-| **Operator** | Multi-region, read-only | Tournament operators and integrators working across regions |
-| **Admin** | Single region (sub-region scoping deferred) | Club-level integrations and region-scoped tools |
+USAV sets the data each partner may access: National, specific regions, or specific clubs. Each key a partner creates can be limited further, but never beyond the partner's approved access.
 
-Sub-region scoping (club, team, or role-level) is deferred. v2.1 scope is region-level only.
+| Key access | What it returns |
+|---|---|
+| **National** | Data in all regions |
+| **Selected regions** | Data in the selected regions |
+| **One club** | That club's people, teams, and transfers |
 
-### Issuance and Rotation
+Data outside a key's access is not returned. List requests return an empty list. Requests for a specific record outside the key's access return `403 Forbidden`.
 
-USAV creates, rotates, and revokes keys in v2.1. Self-service key management is not available in this version. Partners contact USAV to request a key, request rotation, or report a suspected compromise.
+### Creating and Rotating Keys
 
-Proposed rotation cadence: 2 years. Final cadence is being confirmed with USAV; partners should design integrations to allow rotation at least every 2 years.
+Partners create and manage their own keys in the Developer Portal:
+
+- A key's expiration can be 7, 30, 60, or 90 days, a custom date, or none.
+- The full key is shown only once, when it is created. Copy it right away.
+- Rotating replaces the key immediately, with no overlap, and keeps the same expiration date.
+- Keys can also be deactivated or revoked.
+
+Contact USAV about a suspected key compromise, or to change your approved access.
 
 ### Security Notes
 
 - API keys should be kept secure and never exposed in client-side code.
-- Operator and Admin keys are both bearer tokens; protect them as you would a password.
-- Keys can be deactivated without deletion.
-- Expired keys are automatically rejected.
+- API keys are bearer tokens; protect them as you would a password.
+- Requests using an inactive key return `401 Unauthorized`.
 
 ---
 
@@ -85,7 +92,7 @@ GET /api/v1/eligibility/{memberId}?startDate=2026-09-15&endDate=2026-09-17
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
-| `memberId` | integer | Yes | The USAV member ID |
+| `memberId` | string | Yes | The USAV member ID |
 
 #### Query Parameters
 
@@ -100,7 +107,7 @@ If only one of `startDate` or `endDate` is supplied, the other defaults to match
 
 ```json
 {
-  "memberId": 12345678,
+  "memberId": "12345678",
   "memberFound": true,
   "firstName": "Sarah",
   "lastName": "Johnson",
@@ -167,7 +174,7 @@ A membership purchased before its `startDate` returns `eligible: false` with con
 
 ```json
 {
-  "memberId": 12345678,
+  "memberId": "12345678",
   "memberFound": true,
   "firstName": "Sarah",
   "lastName": "Johnson",
@@ -236,7 +243,7 @@ This is by design - the membership is valid, it has simply not begun yet. Pass `
 
 | Property | Type | Description |
 |---|---|---|
-| `memberId` | integer | The USAV member ID |
+| `memberId` | string | The USAV member ID |
 | `memberFound` | boolean | True when the member exists. Always true on a 200 response (404 is returned otherwise). |
 | `firstName` | string | Member's first name (for identity confirmation) |
 | `lastName` | string | Member's last name (for identity confirmation) |
@@ -261,7 +268,7 @@ This is by design - the membership is valid, it has simply not begun yet. Pass `
 #### Notes
 
 - Mid-window flips (for example, a credential expiring between two days inside the window) are not surfaced as flip events in v2.1. Callers needing per-day detail should loop single-day calls or read `conditions[].details` for relevant dates such as `validUntil` and `endDate`.
-- `Blocked` and `Suspended` roles appear in the `roles[]` array with `eligible: false` rather than being hidden.
+- Roles that are not `Active` appear in the `roles[]` array with `eligible: false` rather than being hidden.
 - Future memberships (purchased before their `startDate`) are returned in `roles[]` with `eligible: false` and condition 2 (`Membership has started`) failing. Condition 2 `details` carries `membership.startDate` so callers can see when the member becomes eligible. Pass `startDate = membership.startDate` (or later) to verify future eligibility.
 
 ### Check Eligibility by Club
@@ -269,7 +276,7 @@ This is by design - the membership is valid, it has simply not begun yet. Pass `
 Paginated eligibility for every current member in a club, evaluated over a single day or a window.
 
 ```http
-GET /api/v1/eligibility/club/{clubId}?startDate=2026-09-15&endDate=2026-09-17&role=player&eligibility=eligible
+GET /api/v1/eligibility/club/{clubId}?startDate=2026-09-15&endDate=2026-09-17&role=player&eligibility=true
 ```
 
 #### Path Parameters
@@ -285,8 +292,8 @@ GET /api/v1/eligibility/club/{clubId}?startDate=2026-09-15&endDate=2026-09-17&ro
 | `startDate` | date | No | today | First day of evaluation window |
 | `endDate` | date | No | today | Last day of evaluation window |
 | `role` | string | No | all | Restrict to a single role code |
-| `eligibility` | string | No | all | `eligible` or `ineligible` |
-| `clubAssignmentStatus` | string | No | all | `APPROVED` or `IN_TRANSFER` (narrows the population pre-filter) |
+| `eligibility` | boolean | No | all | `true` for eligible members, `false` for ineligible |
+| `clubAssignmentStatus` | string | No | all | `APPROVED`, `REJECTED`, or `IN_TRANSFER` (narrows the population pre-filter) |
 | `page` | integer | No | 1 | Page number (1-indexed) |
 | `limit` | integer | No | 50 | Items per page (max 200) |
 
@@ -335,7 +342,7 @@ Content-Type: application/json
 
 | Field | Type | Required | Default | Description |
 |---|---|---|---|---|
-| `memberIds` | array&lt;integer&gt; | Yes | - | List of USAV member IDs. Max 100 per request. |
+| `memberIds` | array&lt;string&gt; | Yes | - | List of USAV member IDs. Max 100 per request. |
 | `startDate` | date (YYYY-MM-DD) | No | today | First day of evaluation window |
 | `endDate` | date (YYYY-MM-DD) | No | today | Last day of evaluation window |
 
@@ -346,7 +353,7 @@ Content-Type: application/json
 | `windowStart` | date | First day evaluated |
 | `windowEnd` | date | Last day evaluated |
 | `data[]` | array | Per-member entries, ordered to match the request. Each entry uses the single-member response shape. |
-| `data[].memberId` | integer | Echoed from request |
+| `data[].memberId` | string | Echoed from request |
 | `data[].memberFound` | boolean | False when the memberId does not exist; true otherwise |
 | `data[].roles[]` | array | Populated when `memberFound` is true |
 
@@ -417,13 +424,30 @@ The authoritative numbered list and any role-specific overrides are still being 
 
 ### Region
 
-Regions are the geographic governing bodies for USA Volleyball. Clubs, members, and memberships all belong to a region. Region details appear inline on Club and Membership responses.
+Regions are the geographic governing bodies for USA Volleyball. Clubs, members, and memberships all belong to a region. Region details also appear inline on Club and Membership responses.
+
+#### List Regions
+
+```http
+GET /api/v1/regions
+```
+
+##### Query Parameters
+
+| Parameter | Type | Required | Default | Description |
+|---|---|---|---|---|
+| `page` | integer | No | 1 | Page number (1-indexed) |
+| `limit` | integer | No | 50 | Items per page (max 100) |
+| `code` | string | No | - | Exact region code, not case sensitive |
+| `name` | string | No | - | Partial region name, not case sensitive; at least 3 characters |
+
+#### Region Properties
 
 | Property | Type | Description |
 |---|---|---|
 | `id` | string | Region UUID |
-| `name` | string | Region name (e.g., "Southern California") |
-| `code` | string | Region short code (e.g., "SCVA") |
+| `name` | string | Region name (e.g., "Rocky Mountain") |
+| `code` | string | Region short code (e.g., "RM") |
 
 ---
 
@@ -445,6 +469,9 @@ GET /api/v1/clubs
 | `limit` | integer | No | 50 | Items per page (max 100) |
 | `sort` | string | No | - | Field to sort by; prefix with `-` for descending |
 | `regionId` | string | No | - | Filter by region |
+| `regionCode` | string | No | - | Exact region code, not case sensitive; alternative to `regionId`. Sending both returns `400` |
+| `code` | string | No | - | Exact five-character club code, not case sensitive. May return more than one club |
+| `name` | string | No | - | Partial club name, not case sensitive; 3 to 100 characters |
 
 #### Get Club
 
@@ -464,12 +491,12 @@ Returns the full Club object below. No `expand` parameter in v2.1.
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "name": "Riverside Volleyball Club",
-  "code": "RVC",
+  "code": "RVCLB",
   "regionId": "550e8400-e29b-41d4-a716-446655440001",
   "region": {
     "id": "550e8400-e29b-41d4-a716-446655440001",
-    "name": "Southern California",
-    "code": "SCVA"
+    "name": "Rocky Mountain",
+    "code": "RM"
   },
   "affiliationStatus": "Active",
   "affiliationStatusUpdatedAt": "2024-09-01T00:00:00Z",
@@ -537,7 +564,7 @@ Returns the full Club object below. No `expand` parameter in v2.1.
 
 Teams are competitive units within clubs, organized by classification, play level, and gender. Teams contain member rosters.
 
-In v2.1 the legacy `division` field is replaced by two structured fields: `ageDefinition` and `gender`. "Division" is treated as the composite display label combining the two.
+In v2.1, Team classification uses the structured fields `gender`, `ageDefinition`, `ageGroup`, and `playLevel`. The `division` field is still returned as a display label derived from the Team's gender, age group, and play level.
 
 Team responses include a standardized, partner-facing operational `teamCode`. Partners use Team Code for matching, results, ranking, seeding, troubleshooting, and existing operational workflows.
 
@@ -549,7 +576,7 @@ The standardized `teamCode` structure is:
 
 | Component | Format | Standard |
 |---|---|---|
-| `genderCode` | 1 character | `M` = Male, `F` = Female, `C` = Coed |
+| `genderCode` | 1 character | `M` = Male, `F` = Female, `C` = Co-Ed |
 | `ageGroup` | 1 character | `J` = Junior, `A` = Adult |
 | `playLevel` | 2 characters | Junior age or adult play-level code |
 | `clubCode` | 5 characters | Uppercase letters and numbers; unique within the Region |
@@ -578,8 +605,12 @@ GET /api/v1/teams
 | `limit` | integer | No | 50 | Items per page |
 | `clubId` | string | No | all | Filter by parent club |
 | `regionId` | string | No | all | Filter by region |
-| `ageDefinition` | string | No | all | `7U`, `8U`, `9U`, `10U`, `11U`, `12U`, `13U`, `14U`, `15U`, `16U`, `17U`, `18U` |
-| `gender` | string | No | all | `Male`, `Female`, `Coed` |
+| `regionCode` | string | No | all | Exact region code, not case sensitive; alternative to `regionId`. Sending both returns `400` |
+| `clubCode` | string | No | all | Exact five-character parent club code, not case sensitive |
+| `teamCode` | string | No | all | Exact Team Code, not case sensitive |
+| `name` | string | No | all | Partial team name, not case sensitive; 3 to 100 characters |
+| `ageDefinition` | string | No | all | `8U`, `9U`, `10U`, `11U`, `12U`, `13U`, `14U`, `15U`, `16U`, `17U`, `18U` |
+| `gender` | string | No | all | `Male`, `Female`, `Co-Ed` |
 | `type` | string | No | all | `Indoor`, `Beach`, `Grass` |
 | `status` | string | No | all | `active`, `inactive` |
 | `sort` | string | No | - | e.g., `sort=name`, `sort=-createdAt` |
@@ -630,13 +661,13 @@ Roster is opt-in via `expand=members` to keep the default response small.
       "profileId": "550e8400-e29b-41d4-a716-446655440031",
       "profile": {
         "id": "550e8400-e29b-41d4-a716-446655440031",
-        "memberId": 12345678,
+        "memberId": "12345678",
         "firstName": "Sarah",
         "lastName": "Johnson",
         "birthDate": "2008-05-15",
         "gender": "Female"
       },
-      "role": "player",
+      "role": "athlete",
       "joinedAt": "2024-01-10T00:00:00Z"
     }
   ],
@@ -659,29 +690,29 @@ Roster is opt-in via `expand=members` to keep the default response small.
 | `regionCode` | string | Two-character USAV Region Code or three-character foreign code |
 | `clubId` | string | Parent club UUID |
 | `club` | object | Parent club details (full when `expand=club`) |
-| `ageDefinition` | string (nullable) | Junior age definition: `7U` through `18U`. May be `null` for adult teams. |
-| `gender` | string | `Male`, `Female`, or `Coed` |
+| `ageDefinition` | string (nullable) | Junior age definition: `8U` through `18U`. May be `null` for adult teams. |
+| `gender` | string | `Male`, `Female`, or `Co-Ed` |
 | `division` | string (derived) | Display label derived from the Team’s gender, age group, and play level |
 | `type` | string | `Indoor`, `Beach`, or `Grass` |
 | `status` | string | `active` or `inactive` |
 | `members[]` | array | Roster, only when `expand=members` |
 | `members[].profileId` | string | Member profile UUID |
 | `members[].profile` | object | Member profile details (full when fully expanded) |
-| `members[].role` | string | Per-team role: `player` or `coach` |
+| `members[].role` | string (nullable) | Per-team role: `athlete`, `headCoach`, or `staff` |
 | `members[].joinedAt` | timestamp | When the member joined the team |
+| `members[].jerseyNumber` | integer (nullable) | Jersey number |
+| `members[].positions` | array of strings | Playing positions |
+| `members[].frozen` | boolean | Whether the roster entry is frozen |
+| `members[].frozenAt` | timestamp (nullable) | When the roster entry was frozen |
 | `createdAt` | timestamp | When the team was created |
 
 The `ageDefinition` field represents junior age divisions. Adult classification is represented by `ageGroup` and `playLevel`. The derived `division` field provides a display label appropriate to the Team classification.
-
-The `gender` and `ageDefinition` enum values above are pending final confirmation with USAV national staff (see Open Questions).
 
 ---
 
 ### Profile
 
 Profiles represent individual members in the USA Volleyball system. Each profile contains personal information, demographic data, suspensions, and education information.
-
-The `ageDefinition` field represents junior age divisions. Adult classification is represented by `ageGroup` and `playLevel`. The derived `division` field provides a display label appropriate to the Team classification.
 
 #### List Profiles
 
@@ -697,8 +728,10 @@ GET /api/v1/profiles
 | `limit` | integer | No | 50 | Items per page |
 | `sort` | string | No | - | e.g., `sort=lastName` |
 | `status` | string | No | - | `active` or `inactive` |
+| `memberId` | string | No | - | Filter by USAV member ID |
 | `regionId` | string | No | - | Filter by region |
-| `graduationYear[eq]` | integer | No | - | Exact match on `education.graduationYear` |
+| `regionCode` | string | No | - | Exact region code, not case sensitive; alternative to `regionId`. Sending both returns `400` |
+| `graduationYear` | integer | No | - | Exact match on `education.graduationYear` |
 | `graduationYear[gte]` | integer | No | - | Greater than or equal |
 | `graduationYear[lte]` | integer | No | - | Less than or equal |
 
@@ -719,10 +752,11 @@ Returns the full Profile object. No `expand` parameter in v2.1; fetch membership
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440031",
-  "memberId": 12345678,
+  "memberId": "12345678",
   "firstName": "Sarah",
   "lastName": "Johnson",
   "middleName": "Marie",
+  "preferredName": "Sadie",
   "birthDate": "2008-05-15",
   "gender": "Female",
   "genderIdentity": "Female",
@@ -768,10 +802,11 @@ Returns the full Profile object. No `expand` parameter in v2.1; fetch membership
 | Property | Type | Description |
 |---|---|---|
 | `id` | string | Profile UUID |
-| `memberId` | integer | Sequential member number (unique, auto-generated) |
+| `memberId` | string | Sequential member number (unique, auto-generated) |
 | `firstName` | string | Member's first name |
 | `lastName` | string | Member's last name |
 | `middleName` | string (nullable) | Member's middle name |
+| `preferredName` | string (nullable) | The name the member prefers, when set. Never replaces the legal `firstName` |
 | `birthDate` | date | Date of birth |
 | `gender` | string | Biological / birth gender. Enum: `Male`, `Female`. Used for division and age-group eligibility. |
 | `genderIdentity` | string | Preferred display gender identity. Enum: `Male`, `Female`, `Non-binary`. Used for display only. |
@@ -814,22 +849,23 @@ GET /api/v1/memberships
 | `page` | integer | No | 1 | Page number (1-indexed) |
 | `limit` | integer | No | 50 | Items per page |
 | `profileId` | string | No | - | Filter by profile UUID (all memberships for one person) |
+| `memberId` | string | No | - | Filter by USAV member ID |
 | `regionId` | string | No | - | Filter by region UUID |
+| `regionCode` | string | No | - | Exact region code, not case sensitive; alternative to `regionId`. Sending both returns `400` |
 | `tierId` | string | No | - | Filter by specific tier UUID |
 | `tier.category` | string | No | - | `Full` or `Limited` |
-| `tier.windowType` | string | No | - | `FullSeason`, `FixedDuration`, or `DateRange` |
+| `tier.windowType` | string | No | - | `FullSeason`, `Days`, or `DateRange` |
 | `status` | string | No | - | `Paid`, `Unpaid`, `Canceled`, `Suspended`, `Expired` |
 | `startDate[gte]` | date | No | - | `startDate >= value` |
 | `startDate[lte]` | date | No | - | `startDate <= value` |
 | `endDate[gte]` | date | No | - | `endDate >= value` |
 | `endDate[lte]` | date | No | - | `endDate <= value` |
 | `sort` | string | No | - | e.g., `sort=-startDate` |
-| `expand` | string | No | - | Comma list: `profile`, `region`, `tier`, `roles.club` |
 
 #### Get Membership
 
 ```http
-GET /api/v1/memberships/{id}?expand=profile,region,tier,roles.club
+GET /api/v1/memberships/{id}
 ```
 
 #### The Membership Object
@@ -840,7 +876,7 @@ GET /api/v1/memberships/{id}?expand=profile,region,tier,roles.club
   "profileId": "550e8400-e29b-41d4-a716-446655440031",
   "profile": {
     "id": "550e8400-e29b-41d4-a716-446655440031",
-    "memberId": 12345678,
+    "memberId": "12345678",
     "firstName": "Sarah",
     "lastName": "Johnson"
   },
@@ -848,8 +884,8 @@ GET /api/v1/memberships/{id}?expand=profile,region,tier,roles.club
   "regionId": "550e8400-e29b-41d4-a716-446655440001",
   "region": {
     "id": "550e8400-e29b-41d4-a716-446655440001",
-    "name": "Southern California",
-    "code": "SCVA"
+    "name": "Rocky Mountain",
+    "code": "RM"
   },
   "tierId": "550e8400-e29b-41d4-a716-446655440110",
   "tier": {
@@ -883,7 +919,7 @@ GET /api/v1/memberships/{id}?expand=profile,region,tier,roles.club
         "club": {
           "id": "550e8400-e29b-41d4-a716-446655440000",
           "name": "Riverside Volleyball Club",
-          "code": "RVC"
+          "code": "RVCLB"
         },
         "status": "APPROVED",
         "assignedAt": "2025-08-15T00:00:00Z"
@@ -967,8 +1003,8 @@ GET /api/v1/memberships/{id}?expand=profile,region,tier,roles.club
 | `tier.name` | string | Display name |
 | `tier.length` | string | Human-readable duration (e.g., "Season", "1 Year", "1 Day") |
 | `tier.category` | string | `Full` or `Limited` |
-| `tier.windowType` | string | `FullSeason`, `FixedDuration`, or `DateRange` |
-| `tier.durationDays` | integer (nullable) | Populated when `windowType = FixedDuration` (e.g., 1 for a one-day pass, 365 for a 1-year pass) |
+| `tier.windowType` | string | `FullSeason`, `Days`, or `DateRange` |
+| `tier.durationDays` | integer (nullable) | Populated when `windowType = Days` (e.g., 1 for a one-day pass, 365 for a 1-year pass) |
 | `tier.windowStart` | date (nullable) | Populated when `windowType = DateRange` |
 | `tier.windowEnd` | date (nullable) | Populated when `windowType = DateRange` |
 | `tier.restrictions` | object | `maxRoles`, `allowedTypes` |
@@ -976,7 +1012,7 @@ GET /api/v1/memberships/{id}?expand=profile,region,tier,roles.club
 #### Tier Window Types
 
 - **FullSeason**: Tied to the USAV competition season. Indoor memberships use this pattern.
-- **FixedDuration**: A fixed number of days from the membership's `startDate`. `tier.durationDays` carries the length. One-day memberships are `FixedDuration` with `durationDays = 1`.
+- **Days**: A fixed number of days from the membership's `startDate`. `tier.durationDays` carries the length. One-day memberships are `Days` with `durationDays = 1`.
 - **DateRange**: Explicit `tier.windowStart` and `tier.windowEnd` set on the tier itself.
 
 Regardless of `windowType`, the eligibility check evaluates against the membership's `startDate` and `endDate`.
@@ -998,7 +1034,7 @@ Each role within a membership represents a specific participation type.
 | `id` | string | Role assignment UUID |
 | `membershipRoleId` | string | Role definition UUID |
 | `role` | object | Role definition (id, name) |
-| `status` | string | `Active`, `Pending`, `Blocked`, `Suspended`, `Expired`, `Canceled` |
+| `status` | string | `Active`, `Removed`, `Unpaid`, `Upgraded` |
 | `clubAssignment` | object (nullable) | `clubId`, `status` (`APPROVED`, `REJECTED`, `IN_TRANSFER`), `assignedAt` |
 | `eligibility` | object | Computed eligibility (`isEligible`, `reasons[]`); may drift, use the Eligibility API for live answers |
 | `credentials[]` | array | Per-role credential requirements (see Credential Properties) |
@@ -1008,11 +1044,9 @@ Each role within a membership represents a specific participation type.
 #### Membership Role Statuses
 
 - **Active**: Role is active and the member can participate.
-- **Pending**: Role is awaiting approval or requirements.
-- **Blocked**: Role is blocked due to unmet requirements.
-- **Suspended**: Role is temporarily suspended.
-- **Expired**: Role has expired.
-- **Canceled**: Role has been canceled.
+- **Removed**
+- **Unpaid**
+- **Upgraded**
 
 ---
 
@@ -1033,9 +1067,9 @@ GET /api/v1/credentials
 | `page` | integer | No | 1 | Page number (1-indexed) |
 | `limit` | integer | No | 50 | Items per page |
 | `profileId` | string | No | all | Filter by profile UUID |
-| `memberId` | integer | No | all | Filter by USAV member ID |
-| `type` | string | No | all | `SAFESPORT` or `LITMOS` |
-| `status` | string | No | all | `NotStarted`, `InProgress`, `Completed`, `Expired`, `Failed` |
+| `memberId` | string | No | all | Filter by USAV member ID |
+| `type` | string | No | all | `SAFESPORT`, `LITMOS`, or `NCSI` |
+| `status` | string | No | all | `NotStarted`, `InProgress`, `Completed`, `Cancelled`, `Submitted`, `Failed`, `Inactive` |
 | `validUntil[gte]` | date | No | - | Range filter |
 | `validUntil[lte]` | date | No | - | Range filter |
 | `sort` | string | No | - | e.g., `sort=validUntil` |
@@ -1046,12 +1080,12 @@ GET /api/v1/credentials
 |---|---|---|
 | `id` | string | Credential assignment UUID |
 | `profileId` | string | Owning profile |
-| `memberId` | integer | USAV member ID |
+| `memberId` | string | USAV member ID |
 | `credentialId` | string | Credential definition UUID |
 | `credential` | object | Credential details |
 | `credential.name` | string | Credential name |
-| `credential.type` | string | `SAFESPORT` or `LITMOS` |
-| `status` | string | `NotStarted`, `InProgress`, `Completed`, `Expired`, `Failed` |
+| `credential.type` | string | `SAFESPORT`, `LITMOS`, or `NCSI` |
+| `status` | string | `NotStarted`, `InProgress`, `Completed`, `Cancelled`, `Submitted`, `Failed`, `Inactive` |
 | `requiredFrom` | timestamp | When the credential becomes required for this member |
 | `completedAt` | timestamp (nullable) | When completed |
 | `validUntil` | timestamp (nullable) | When the credential expires |
@@ -1060,14 +1094,17 @@ GET /api/v1/credentials
 
 - **SAFESPORT**: SafeSport training requirements.
 - **LITMOS**: Training courses delivered via the Litmos LMS.
+- **NCSI**: Credentials tracked through NCSI.
 
 #### Credential Statuses
 
 - **NotStarted**: Requirement not yet begun.
 - **InProgress**: Member is working on the credential.
 - **Completed**: Credential successfully completed.
-- **Expired**: Previously completed credential has expired.
+- **Cancelled**: Credential was cancelled.
+- **Submitted**: Credential was submitted.
 - **Failed**: Credential attempt failed.
+- **Inactive**: USA Volleyball revoked the credential. It keeps its `completedAt` and `validUntil`, so check `status`.
 
 ---
 
@@ -1090,7 +1127,7 @@ GET /api/v1/waivers
 | `page` | integer | No | 1 | Page number (1-indexed) |
 | `limit` | integer | No | 50 | Items per page |
 | `profileId` | string | No | all | Filter by profile UUID |
-| `memberId` | integer | No | all | Filter by USAV member ID |
+| `memberId` | string | No | all | Filter by USAV member ID |
 | `type` | string | No | all | Waiver type identifier |
 | `status` | string | No | all | Always `Published` (filtering by status is effectively a no-op until additional states are introduced) |
 | `validUntil[gte]` | date | No | - | Range filter |
@@ -1103,7 +1140,7 @@ GET /api/v1/waivers
 |---|---|---|
 | `id` | string | Waiver UUID |
 | `profileId` | string | Owning profile |
-| `memberId` | integer | USAV member ID |
+| `memberId` | string | USAV member ID |
 | `type` | string | Waiver type identifier |
 | `status` | string | Always `Published` from the API perspective in v2.1 |
 | `requiredFrom` | timestamp | When the waiver became required |
@@ -1132,7 +1169,7 @@ GET /api/v1/suspensions
 | `page` | integer | No | 1 | Page number (1-indexed) |
 | `limit` | integer | No | 50 | Items per page |
 | `profileId` | string | No | all | Filter by profile UUID |
-| `memberId` | integer | No | all | Filter by USAV member ID |
+| `memberId` | string | No | all | Filter by USAV member ID |
 | `scope` | string | No | all | `global` or `role-specific` |
 | `active` | boolean | No | all | `true` returns suspensions in effect now; `false` returns resolved or upcoming |
 | `startDate[gte]` | date | No | - | Range filter |
@@ -1147,7 +1184,7 @@ GET /api/v1/suspensions
 |---|---|---|
 | `id` | string | Suspension UUID |
 | `profileId` | string | Affected profile |
-| `memberId` | integer | USAV member ID |
+| `memberId` | string | USAV member ID |
 | `scope` | string | `global` or `role-specific` (computed from `affectedRoles`) |
 | `affectedRoles[]` | array (nullable) | Role codes affected. Null or empty = global suspension. |
 | `reason` | string | Short reason |
@@ -1189,7 +1226,7 @@ GET /api/v1/club-transfers
 |---|---|---|
 | `id` | string | Transfer UUID |
 | `profileId` | string | Member being transferred |
-| `profile` | object | Member profile (when expanded) |
+| `profile` | object | Member profile |
 | `fromClubId` | string | Source club UUID |
 | `fromClub` | object | Source club details |
 | `toClubId` | string | Destination club UUID |
@@ -1255,7 +1292,7 @@ For pre-registration eligibility checks, pass a future window. For audit purpose
 Use the club-scope endpoint to retrieve every current member of a club with eligibility evaluated in one paginated response:
 
 ```http
-GET /api/v1/eligibility/club/{clubId}?startDate=2026-09-15&endDate=2026-09-17&eligibility=ineligible
+GET /api/v1/eligibility/club/{clubId}?startDate=2026-09-15&endDate=2026-09-17&eligibility=false
 ```
 
 Apply `role`, `eligibility`, or `clubAssignmentStatus` filters to narrow the population.
@@ -1273,8 +1310,8 @@ GET /api/v1/eligibility/region/{regionId}?startDate=2026-09-15&endDate=2026-09-1
 Use the standalone Credentials list endpoint, or read credentials embedded inside Membership Role responses for inline use:
 
 ```http
-GET /api/v1/credentials?type=SAFESPORT&status=Expired
-GET /api/v1/credentials?validUntil[lte]=2026-12-31&status=Completed   # expiring this year
+GET /api/v1/credentials?type=SAFESPORT&status=Failed
+GET /api/v1/credentials?validUntil[gte]=2026-11-05&validUntil[lte]=2026-12-31&status=Completed   # still valid, expiring this year
 ```
 
 ### Watching for Club Transfers in Tournament Windows
@@ -1293,9 +1330,7 @@ These items are still being finalized with USAV national staff and partners. The
 | OQ-02 | Do any credential types constitute a hard eligibility requirement beyond what is already enforced? | The current design treats credentials assigned to a role as blocking conditions. Confirmation pending. |
 | OQ-03 | Do unsigned waivers block eligibility? | Waivers are present in the data model but are not currently included as an eligibility condition. If confirmed as blocking, they will be added. |
 | OQ-04 | What is the authoritative numbered list of the 7 conditions? | The list above reflects the implementation; the canonical wording is being confirmed with USAV national staff. |
-| OQ-05 | Final enum values for Team `gender` and `ageDefinition`. | Current values (`Male`, `Female`, `Coed`; `7U`-`18U`) are pending USAV confirmation. |
 | OQ-06 | Final Club Transfer SLA value. | A small-minutes SLA is being finalized; partners can subscribe to `club.transfer.completed` in the meantime. |
-| OQ-07 | Final API key rotation cadence. | Proposed at 2 years, pending confirmation. |
 
 ---
 
@@ -1343,6 +1378,8 @@ The API uses conventional HTTP response codes:
 
 The API is versioned through the URL path. The current version is `v1`. v2.1 of this documentation describes the surface of the `v1` API as it stands at this revision. Breaking changes will be introduced in a new URL version (e.g., `v2`); non-breaking changes may be added to existing versions.
 
+This document is versioned through Git. The file name stays the same, and past revisions are available in its history. See [CHANGELOG.md](CHANGELOG.md) for a summary of changes.
+
 ---
 
 ## Pagination
@@ -1387,7 +1424,25 @@ GET /api/v1/profiles?status=active&regionId=550e8400-e29b-41d4-a716-446655440001
 GET /api/v1/memberships?status=Paid&startDate[gte]=2025-01-01&tier.windowType=FullSeason
 ```
 
-Range comparison operators (`[gte]`, `[lte]`, `[eq]`) are supported on date and integer fields where indicated.
+Range comparison operators (`[gte]`, `[lte]`) are supported on date and integer fields where indicated.
+
+Filter behavior:
+
+- Region, club, and team codes are not case sensitive.
+- Name filters match part of a name and are not case sensitive. Names under 3 characters return `400 Bad Request`.
+- Badly formatted `clubCode` or `teamCode` values return `400 Bad Request`.
+- Unknown values, and values outside your key's access, return `200 OK` with an empty list.
+- Sending both `regionId` and `regionCode` returns `400 Bad Request`.
+
+Example lookups:
+
+```http
+GET /api/v1/regions?code=RM
+GET /api/v1/clubs?regionCode=RM&code=CLUB1
+GET /api/v1/teams?clubCode=CLUB1
+GET /api/v1/teams?teamCode=FJ12TCOPT01PT
+GET /api/v1/profiles?memberId=12345678
+```
 
 Sorting is available via the `sort` parameter:
 
@@ -1400,73 +1455,16 @@ GET /api/v1/profiles?sort=lastName  # ascending by last name
 
 ## Expanding Related Objects
 
-By default, related objects are returned as IDs. Use the `expand` parameter to include full object details where supported:
+Each endpoint's response shows the related objects it includes. `GET /api/v1/teams/{id}` is the only endpoint with an `expand` parameter. Its supported values are `members` and `club`:
 
 ```http
-GET /api/v1/memberships/123?expand=profile,region,tier,roles.club
-GET /api/v1/teams/456?expand=members,club
+GET /api/v1/teams/{id}?expand=members,club
 ```
-
-This reduces the number of round-trips needed to assemble a complete view.
 
 ---
 
 ## Webhooks
 
-Webhooks deliver real-time notifications for entity changes. Webhook subscriptions are managed by USAV in v2.1; partners contact USAV with a callback URL and the event types they want, and USAV registers the subscription and returns a shared secret. Self-service subscription management may be added in a future revision.
+Webhooks deliver notifications when records change, so partners do not need to poll for changes. Subscriptions are managed in the Developer Portal.
 
-### Supported Events
-
-| Event | Entity | Fires when |
-|---|---|---|
-| `membership.created` | Membership | A new membership is created |
-| `membership.updated` | Membership | Any membership field changes (high volume) |
-| `membership.paid` | Membership | Payment settles - key signal for an eligibility flip |
-| `profile.created` | Profile | A new profile is created |
-| `profile.updated` | Profile | Any profile field changes |
-| `profile.suspended` | Profile | A suspension is added to a profile |
-| `club.affiliated` | Club | Club moves to `Active` affiliation |
-| `club.disaffiliated` | Club | Club moves off `Active` |
-| `team.created` | Team | A new Team record is created |
-| `team.updated` | Team | Any Team field changes |
-| `credential.completed` | Credential | A required credential is completed |
-| `credential.expired` | Credential | A credential passes its `validUntil` |
-| `club.transfer.initiated` | Club Transfer | A member transfer is requested |
-| `club.transfer.approved` | Club Transfer | A transfer is approved |
-| `club.transfer.rejected` | Club Transfer | A transfer is denied |
-| `club.transfer.completed` | Club Transfer | A transfer is fully processed |
-
-The Team webhook events are basic v2.1 notifications intended to help partners avoid polling for Team changes. Retry handling, delivery logs, failed webhook notifications, and richer webhook management may be expanded after the June 1 milestone.
-
-### Webhook Payload
-
-```json
-{
-  "id": "evt_abc123",
-  "type": "membership.paid",
-  "created": "2025-08-15T10:30:00Z",
-  "data": {
-    "object": {
-      "id": "550e8400-e29b-41d4-a716-446655440100",
-      "profileId": "550e8400-e29b-41d4-a716-446655440031",
-      "status": "Paid"
-    }
-  }
-}
-```
-
-### Webhook Security
-
-Each webhook subscription has a shared secret issued by USAV when the subscription is registered. Webhook requests carry the shared secret in the `Authorization` header so the receiver can verify the request is from USAV:
-
-```http
-Authorization: Bearer usav_abc123...
-```
-
-To verify a webhook request:
-
-1. Extract the bearer token from the `Authorization` header.
-2. Compare it against the shared secret you received when the subscription was registered.
-3. Validate the destination URL matches your registered callback URL.
-
-Store the shared secret securely. If a secret is compromised, contact USAV immediately to rotate the subscription.
+See [webhooks.md](webhooks.md) for the full contract: events, payloads, signature verification, and retries.

@@ -2,6 +2,44 @@
 
 Changes to the partner documentation in this repository. For the exact edits to any file, open the file and click **History**.
 
+## 2026-11-05
+
+### Repository
+
+- Added a README with guidance on which file to use, how to get access, and how to test.
+
+### API documentation
+
+- Added `GET /api/v1/regions`.
+- Added filters:
+  - Clubs: `regionCode`, `code`, `name`
+  - Teams: `regionCode`, `clubCode`, `teamCode`, `name`
+  - Profiles: `memberId`, `regionCode`
+  - Memberships: `memberId`, `regionCode`
+- Added filter behavior: case handling, partial name matches, empty results, and error responses.
+- Added the Sandbox and Production addresses.
+- Updated access and API key sections for the Developer Portal, including National key access.
+- Webhooks section now points to `webhooks.md`.
+- Corrected to match the API:
+  - `memberId` and `memberIds` values are strings.
+  - Profiles filter: `graduationYear` replaces `graduationYear[eq]`.
+  - Team `gender` value is `Co-Ed`. Team `ageDefinition` runs `8U` through `18U`.
+  - Team member `role` values are `athlete`, `headCoach`, and `staff`.
+  - Membership tier `windowType` value is `Days`, not `FixedDuration`.
+  - Credential `status` values are `NotStarted`, `InProgress`, `Completed`, `Cancelled`, `Submitted`, `Failed`, and `Inactive`. `Expired` is not a status.
+  - Eligibility filters: `eligibility` is true or false, and `clubAssignmentStatus` adds `REJECTED`.
+  - Membership role `status` values are `Active`, `Removed`, `Unpaid`, and `Upgraded`.
+  - Credential `type` adds `NCSI`.
+  - `expand` is available only on `GET /api/v1/teams/{id}`.
+  - `division` is still returned as a display label.
+- Added fields: Profile `preferredName`; Team member `jerseyNumber`, `positions`, `frozen`, and `frozenAt`.
+- Corrected example values for Region and Club code.
+- Removed two resolved open questions: Team value lists and key rotation cadence.
+
+### Webhooks
+
+- Subscriptions are now managed in the Developer Portal.
+
 ## 2026-11-04
 
 ### Repository
