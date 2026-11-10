@@ -2,6 +2,12 @@
 
 Changes to the partner documentation in this repository. For the exact edits to any file, open the file and click **History**.
 
+## 2026-11-10
+
+### API documentation
+
+- Added `updatedAt` to the Club, Club Team, Profile, Membership, Credential, Waiver, Suspension, and Club Transfer property tables. The API already returns this field: a non-null UTC timestamp of when the record last changed. It is not returned on eligibility responses.
+
 ## 2026-11-05
 
 ### Repository
