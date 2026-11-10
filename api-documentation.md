@@ -550,6 +550,7 @@ Returns the full Club object below. No `expand` parameter in v2.1.
 | `logoUrl` | string (nullable) | URL to club logo image |
 | `createdAt` | timestamp | When the club was created |
 | `metadata` | object | Additional metadata (e.g., `stripeCustomerId`) |
+| `updatedAt` | timestamp | When the record was last changed (UTC, never null) |
 
 #### Affiliation Statuses
 
@@ -705,6 +706,7 @@ Roster is opt-in via `expand=members` to keep the default response small.
 | `members[].frozen` | boolean | Whether the roster entry is frozen |
 | `members[].frozenAt` | timestamp (nullable) | When the roster entry was frozen |
 | `createdAt` | timestamp | When the team was created |
+| `updatedAt` | timestamp | When the record was last changed (UTC, never null) |
 
 The `ageDefinition` field represents junior age divisions. Adult classification is represented by `ageGroup` and `playLevel`. The derived `division` field provides a display label appropriate to the Team classification.
 
@@ -822,6 +824,7 @@ Returns the full Profile object. No `expand` parameter in v2.1; fetch membership
 | `education.graduationYear` | integer (nullable) | High-school graduation year. Required when the profile is created via the MMS child-add flow (Junior Athlete intake); nullable on all other profiles. |
 | `avatarUrl` | string (nullable) | URL to profile avatar |
 | `createdAt` | timestamp | When the profile was created |
+| `updatedAt` | timestamp | When the record was last changed (UTC, never null) |
 
 #### Profile Statuses
 
@@ -994,6 +997,7 @@ GET /api/v1/memberships/{id}
 | `address` | object | Address associated with this membership |
 | `payment` | object (nullable) | Payment information |
 | `createdAt` | timestamp | When the membership was created |
+| `updatedAt` | timestamp | When the record was last changed (UTC, never null) |
 
 #### Tier Properties
 
@@ -1089,6 +1093,7 @@ GET /api/v1/credentials
 | `requiredFrom` | timestamp | When the credential becomes required for this member |
 | `completedAt` | timestamp (nullable) | When completed |
 | `validUntil` | timestamp (nullable) | When the credential expires |
+| `updatedAt` | timestamp | When the record was last changed (UTC, never null) |
 
 #### Credential Types
 
@@ -1147,6 +1152,7 @@ GET /api/v1/waivers
 | `signedAt` | timestamp (nullable) | When the member signed (null = not signed) |
 | `validUntil` | timestamp (nullable) | Expiry |
 | `version` | string (nullable) | Waiver version signed |
+| `updatedAt` | timestamp | When the record was last changed (UTC, never null) |
 
 Whether an unsigned waiver should block eligibility is an open question (see Open Questions). v2.1 does not include a waiver condition in the Eligibility API; if that resolves to "yes," a future revision will add one.
 
@@ -1191,6 +1197,7 @@ GET /api/v1/suspensions
 | `startDate` | timestamp | When the suspension takes effect |
 | `endDate` | timestamp (nullable) | When the suspension ends. Null = indefinite. |
 | `createdAt` | timestamp | When the suspension was created |
+| `updatedAt` | timestamp | When the record was last changed (UTC, never null) |
 
 `active` is computed as `startDate <= now AND (endDate IS NULL OR endDate >= now)`.
 
@@ -1235,6 +1242,7 @@ GET /api/v1/club-transfers
 | `requestedAt` | timestamp | When the transfer was initiated |
 | `completedAt` | timestamp (nullable) | When the transfer resolved |
 | `requestedBy` | string | User ID that initiated the transfer |
+| `updatedAt` | timestamp | When the record was last changed (UTC, never null) |
 
 **Transfer SLA:** Transfers are expected to be processed within a small number of minutes of approval. The exact SLA is being finalized with USAV. Tournament operators relying on current club assignment should subscribe to `club.transfer.completed` rather than poll.
 
