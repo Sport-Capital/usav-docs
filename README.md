@@ -10,7 +10,7 @@ Start here. This repository holds the documentation partners need to connect to 
 | Look up a field or filter: definition, data type, length, allowed values | [mms-partner-api-response-data-dictionary.md](mms-partner-api-response-data-dictionary.md) |
 | Load the same field and filter list into a spreadsheet or tool | [mms-partner-api-response-data-dictionary.csv](mms-partner-api-response-data-dictionary.csv) |
 | Receive notifications when records change | [webhooks.md](webhooks.md) |
-| Compare API test results against the test data | [sample-data/team-colorado-test-members.csv](sample-data/team-colorado-test-members.csv) |
+| See an export of the test club's members | [sample-data/team-colorado-test-members.csv](sample-data/team-colorado-test-members.csv) |
 | See what changed and when | [CHANGELOG.md](CHANGELOG.md) |
 | Find an older document | [archive/](archive/) |
 
@@ -48,7 +48,7 @@ With a PT key, this returns one club: Team Colorado Volleyball (Test).
 ### About the test data
 
 - All of the people in the test data are synthetic.
-- The sample CSV is an export of the test club's members. Use it to compare against what the API returns.
+- The sample CSV is an export of the test club's members.
 
 ## Production
 
