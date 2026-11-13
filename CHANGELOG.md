@@ -2,6 +2,12 @@
 
 Changes to the partner documentation in this repository. For the exact edits to any file, open the file and click **History**.
 
+## 2026-11-13
+
+### Repository
+
+- README: clarified what the sample data file contains.
+
 ## 2026-11-10
 
 ### API documentation
